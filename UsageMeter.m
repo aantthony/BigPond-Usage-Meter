@@ -118,7 +118,7 @@ NSMutableArray *js_used, *js_date,*js_unmetered,*js_upload,*js_download;
 	NSString * data;
 	
 
-	//@try{
+	@try{
 
 		if([username isEqualToString:@"example@bigpond.com"]){
 			return @"Please Login";
@@ -494,10 +494,10 @@ NSMutableArray *js_used, *js_date,*js_unmetered,*js_upload,*js_download;
 			return @"";
 			
 		}
-	/*}
+	}
 	@catch(NSException * theException){
 		return [NSString stringWithFormat:@"ERR%@",[theException reason]];
-	}*/
+	}
 	return NO;
 	
 }
