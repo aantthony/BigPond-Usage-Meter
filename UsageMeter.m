@@ -118,7 +118,7 @@ NSMutableArray *js_used, *js_date,*js_unmetered,*js_upload,*js_download;
 	NSString * data;
 	
 
-	@try{
+	//@try{
 
 		if([username isEqualToString:@"example@bigpond.com"]){
 			return @"Please Login";
@@ -227,23 +227,43 @@ NSMutableArray *js_used, *js_date,*js_unmetered,*js_upload,*js_download;
 			}
 			//New usage meter page (16 Nov 2010)
 			foundRange = [data rangeOfString:@"<th>Monthly Plan Allowance:</th><td>"];
+            
 			NSString *top;
 			NSString *bacctype;
 			NSString *acctype;
 			
+            if(foundRange.location != NSNotFound){
+                
+                top=[data substringFromIndex:foundRange.location+foundRange.length];
+            }else{
+                foundRange = [data rangeOfString:@"<td valign=\"top\" nowrap=\"nowrap\">Monthly plan allowance</td>"];
+                
+                top=[data substringFromIndex:foundRange.location+foundRange.length];
+                top=[top substringFromIndex:[top rangeOfString:@">"].location];
+            }
 			
-			top=[data substringFromIndex:foundRange.location+foundRange.length];
 			acctype = [top substringToIndex:[top rangeOfString:@"B"].location];
 			
 			bacctype=acctype;
 			acctype=[[[bacctype stringByReplacingOccurrencesOfString:@"T" withString:@"000000"] stringByReplacingOccurrencesOfString:@"G" withString:@"000"] stringByReplacingOccurrencesOfString:@"M" withString:@""];
 			
 			//itotoal: Monthly Plan Allowance. (MB)
-			itotoal=[[acctype stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+			itotoal=[[[acctype stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] intValue];
 		
 			//NSRange table_begin=[top rangeOfString:@"<table class=\"usage bottom_margin\">"]; (there is rubbish around here)
 			NSRange table_begin=[top rangeOfString:@"</thead>"];
-			NSRange table_end = [top rangeOfString:@"<div  id=\"usagenotes\" class=\"content terms\">" options:NSLiteralSearch range:NSMakeRange(table_begin.location, [top length]-table_begin.location)];
+			NSRange table_end;
+            if(table_begin.location == NSNotFound){
+                
+                table_begin=[top rangeOfString:@"<table cellspacing=\"0\" cellpadding=\"3\" width=\"100%\" border=\"0\" style=\"border: 1px solid #0075B0\">"];
+                table_end = [top rangeOfString:@"</table>" options:NSLiteralSearch range:NSMakeRange(table_begin.location, [top length]-table_begin.location)];
+                
+                table_begin= [top rangeOfString:@"<tr bgcolor=\"#CDE1F1\">" options:NSLiteralSearch range:NSMakeRange(table_begin.location, table_end.location-table_begin.location)];
+                
+            }else{
+                table_end = [top rangeOfString:@"<div  id=\"usagenotes\" class=\"content terms\">" options:NSLiteralSearch range:NSMakeRange(table_begin.location, [top length]-table_begin.location)];
+                
+            }
 			NSString * table=[top substringWithRange:NSMakeRange(table_begin.location, table_end.location-table_begin.location)];
 			
 		
@@ -309,28 +329,44 @@ NSMutableArray *js_used, *js_date,*js_unmetered,*js_upload,*js_download;
 #endif
 			
 			index = [table rangeOfString:@"<th scope=\"row\" class=\"a_left\">"];
+            if(index.location==NSNotFound){
+                index = [table rangeOfString:@"<td nowrap=\"nowrap\">"];
+            }
 			b = [table substringWithRange:NSMakeRange(index.location+index.length, 3)];
 			ibillstart=[[b stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 			index=[top rangeOfString:@"<strong class=\"blue\">Total</strong>"];
 			int likels=0;
-			if(index.length==0){
+            
+			if(index.location == NSNotFound){
 				likels=1;
 				//This code will not work
 				index=[top rangeOfString:@"<td class=\"tdLeftNoWrap\"><strong>Total</strong></td>"];
 			}
 			
-			NSString *bused = [top substringWithRange:NSMakeRange(index.location+index.length,200)];
-			
+			NSString *bused;
+            if(index.location == NSNotFound){
+                index = [top rangeOfString:@"<strong>Total</strong></td>"];
+            }
+            
+            bused = [top substringWithRange:NSMakeRange(index.location+index.length,200)];                
 			
 			//this just skips through to the right column, which is the TOTAL BILLED USAGE,
-			int boldfontbegin=[bused rangeOfString:@"<b>"].location+3;
-			int boldfontend=[bused rangeOfString:@"</b>"].location;
-			bused = [bused substringWithRange:NSMakeRange(boldfontbegin, boldfontend-boldfontbegin)];
+            NSRange boldfontbeginrange=[bused rangeOfString:@"<b>"];
+            NSRange boldfontendrange=[bused rangeOfString:@"</b>"];
+            if(boldfontendrange.location == NSNotFound || boldfontbeginrange.location == NSNotFound){
+                
+                boldfontbeginrange=[bused rangeOfString:@"<strong>"];
+                boldfontendrange=[bused rangeOfString:@"</strong>"];
 
-			iused=[[bused stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
+            }
+            int boldfontbegin=boldfontbeginrange.location+boldfontbeginrange.length;
+            int boldfontend=boldfontendrange.location;
+                
+            bused = [bused substringWithRange:NSMakeRange(boldfontbegin, boldfontend-boldfontbegin)];
+
+            iused=[[bused stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 			
-			
-			billingstart=ibillstart;
+            billingstart=ibillstart;
 			_used=iused;
 			_total=itotoal;
 			if(dataloaded){
@@ -458,10 +494,10 @@ NSMutableArray *js_used, *js_date,*js_unmetered,*js_upload,*js_download;
 			return @"";
 			
 		}
-	}
+	/*}
 	@catch(NSException * theException){
 		return [NSString stringWithFormat:@"ERR%@",[theException reason]];
-	}
+	}*/
 	return NO;
 	
 }
