@@ -3460,7 +3460,7 @@
 		</dict>
 		<string>IDEWorkspaceTabController_40F32107-8B40-413A-A122-8A5C592F579C</string>
 		<string>IDEWorkspaceWindowControllerUniqueIdentifier</string>
-		<string>{{17, 97}, {1226, 673}}</string>
+		<string>{{-5, 246}, {1214, 532}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3607,7 +3607,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>373</real>
+		<real>232</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4261,7 +4261,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {259, 553}}</string>
+		<string>{{0, 0}, {259, 412}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4528,7 +4528,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>966</real>
+		<real>954</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4604,7 +4604,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>170</integer>
+					<integer>28</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -5048,7 +5048,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>796</real>
+		<real>784</real>
 		<string>Xcode3BuildPhasesEditor</string>
 		<dict>
 			<key>$class</key>
@@ -5087,7 +5087,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/anthony/Developer/Programs/BigPond-Usage-Meter/Bigpond%20Menu%20Bar.xcodeproj/</string>
-		<real>330181349.52556902</real>
+		<real>330182004.56788599</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5280,7 +5280,7 @@
 			<key>NS.objects</key>
 			<array/>
 		</dict>
-		<string>{0, 7}</string>
+		<string>{0, 611}</string>
 		<string>Bigpond Menu Bar</string>
 		<string>Xcode.Xcode3ProjectSupport.EditorDocument.Xcode3Project</string>
 		<dict>
@@ -5315,7 +5315,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {966, 475}}</string>
+		<string>{{0, 0}, {954, 434}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5466,7 +5466,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>482</real>
+		<real>476</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5496,7 +5496,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>483</real>
+		<real>477</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5565,7 +5565,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>482</real>
+		<real>476</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5595,7 +5595,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>483</real>
+		<real>477</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5685,7 +5685,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>497</real>
+		<real>356</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5965,15 +5965,15 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>634</integer>
-				</dict>
-				<dict>
-					<key>CF$UID</key>
 					<integer>635</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>646</integer>
+					<integer>636</integer>
+				</dict>
+				<dict>
+					<key>CF$UID</key>
+					<integer>647</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -6295,7 +6295,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>796</real>
+		<real>784</real>
 		<string>Xcode3BuildPhasesEditor</string>
 		<dict>
 			<key>$class</key>
@@ -6333,7 +6333,7 @@
 				<integer>486</integer>
 			</dict>
 		</dict>
-		<real>330181349.52437103</real>
+		<real>330182004.56599301</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6484,7 +6484,7 @@
 			<key>NS.objects</key>
 			<array/>
 		</dict>
-		<string>{0, 7}</string>
+		<string>{0, 611}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7941,7 +7941,7 @@
 			</array>
 		</dict>
 		<string>IDENameString</string>
-		<string>Sign, Upload and Push</string>
+		<string>Bigpond Menu Bar Debug</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7975,7 +7975,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>615</integer>
+					<integer>634</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8050,7 +8050,7 @@
 		<string>IDEActivityReportStringSegmentStringValue</string>
 		<real>2</real>
 		<string> </string>
-		<string>Build</string>
+		<string>Archive</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8090,7 +8090,7 @@
 		</dict>
 		<real>4</real>
 		<string>: </string>
-		<string>Sign, Upload and Push</string>
+		<string>Bigpond Menu Bar Debug</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8141,19 +8141,19 @@
 			YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFy
 			Y2hpdmVyVCR0b3ASAAGGoK0HCA8QGhscJCUrMTQ3VSRudWxs0wkK
 			CwwNDlxOU0F0dHJpYnV0ZXNWJGNsYXNzWE5TU3RyaW5ngAOADIAC
-			WENhbmNlbGVk0woREhMUF1dOUy5rZXlzWk5TLm9iamVjdHOAC6IV
-			FoAEgAWiGBmABoAJVk5TRm9udFdOU0NvbG9y1AodHh8gISIjVk5T
-			TmFtZVZOU1NpemVYTlNmRmxhZ3OACIAHI0AmAAAAAAAAEQ0QXxAR
-			THVjaWRhR3JhbmRlLUJvbGTSJicoKVokY2xhc3NuYW1lWCRjbGFz
-			c2VzVk5TRm9udKIoKlhOU09iamVjdNMKLC0uLzBcTlNDb2xvclNw
-			YWNlV05TV2hpdGWAChADQjAA0iYnMjNXTlNDb2xvcqIyKtImJzU2
-			XE5TRGljdGlvbmFyeaI1KtImJzg5XxASTlNBdHRyaWJ1dGVkU3Ry
-			aW5nojoqXxASTlNBdHRyaWJ1dGVkU3RyaW5nXxAPTlNLZXllZEFy
-			Y2hpdmVy0T0+VHJvb3SAAQAIABEAGgAjAC0AMgA3AEUASwBSAF8A
-			ZgBvAHEAcwB1AH4AhQCNAJgAmgCdAJ8AoQCkAKYAqACvALcAwADH
-			AM4A1wDZANsA5ADnAPsBAAELARQBGwEeAScBLgE7AUMBRQFHAUoB
-			TwFXAVoBXwFsAW8BdAGJAYwBoQGzAbYBuwAAAAAAAAIBAAAAAAAA
-			AD8AAAAAAAAAAAAAAAAAAAG9
+			WVN1Y2NlZWRlZNMKERITFBdXTlMua2V5c1pOUy5vYmplY3RzgAui
+			FRaABIAFohgZgAaACVZOU0ZvbnRXTlNDb2xvctQKHR4fICEiI1ZO
+			U05hbWVWTlNTaXplWE5TZkZsYWdzgAiAByNAJgAAAAAAABENEF8Q
+			EUx1Y2lkYUdyYW5kZS1Cb2xk0iYnKClaJGNsYXNzbmFtZVgkY2xh
+			c3Nlc1ZOU0ZvbnSiKCpYTlNPYmplY3TTCiwtLi8wXE5TQ29sb3JT
+			cGFjZVdOU1doaXRlgAoQA0IwANImJzIzV05TQ29sb3KiMirSJic1
+			NlxOU0RpY3Rpb25hcnmiNSrSJic4OV8QEk5TQXR0cmlidXRlZFN0
+			cmluZ6I6Kl8QEk5TQXR0cmlidXRlZFN0cmluZ18QD05TS2V5ZWRB
+			cmNoaXZlctE9PlRyb290gAEACAARABoAIwAtADIANwBFAEsAUgBf
+			AGYAbwBxAHMAdQB/AIYAjgCZAJsAngCgAKIApQCnAKkAsAC4AMEA
+			yADPANgA2gDcAOUA6AD8AQEBDAEVARwBHwEoAS8BPAFEAUYBSAFL
+			AVABWAFbAWABbQFwAXUBigGNAaIBtAG3AbwAAAAAAAACAQAAAAAA
+			AAA/AAAAAAAAAAAAAAAAAAABvg==
 			</data>
 		</dict>
 		<dict>
@@ -8229,7 +8229,7 @@
 				<integer>631</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>330181335.21784198</real>
+			<real>330181434.80892903</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -8240,8 +8240,9 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 11:02 PM</string>
+		<string>Today at 11:03 PM</string>
 		<integer>234</integer>
+		<string>Bigpond Menu Bar Debug</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8270,18 +8271,18 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>636</integer>
+					<integer>637</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>638</integer>
+					<integer>639</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>643</integer>
+					<integer>644</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8299,7 +8300,7 @@
 			<key>NS.relative</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>637</integer>
+				<integer>638</integer>
 			</dict>
 		</dict>
 		<string>x-xcode-log://D38AE1BF-6C13-45B4-9BD6-A6C9D78A976A</string>
@@ -8313,22 +8314,22 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>639</integer>
+					<integer>640</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>640</integer>
+					<integer>641</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>641</integer>
+					<integer>642</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>642</integer>
+					<integer>643</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8346,22 +8347,22 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>639</integer>
+					<integer>640</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>640</integer>
+					<integer>641</integer>
 				</dict>
 			</array>
 			<key>NS.objects</key>
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>644</integer>
+					<integer>645</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>645</integer>
+					<integer>646</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8377,7 +8378,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>647</integer>
+					<integer>648</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -8393,7 +8394,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>636</integer>
+					<integer>637</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -8405,15 +8406,15 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>648</integer>
+					<integer>649</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>650</integer>
+					<integer>651</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>652</integer>
+					<integer>653</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8448,7 +8449,7 @@
 			<key>NS.relative</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>649</integer>
+				<integer>650</integer>
 			</dict>
 		</dict>
 		<string>file://localhost/Users/anthony/Library/Developer/Xcode/DerivedData/Bigpond_Menu_Bar-ckhnrdxotqxkgoccxptkbynviluy/Build/Intermediates/Bigpond%20Menu%20Bar.build/Debug/Bigpond%20Menu%20Bar%20Debug.build/Script-927CB47312616ECA0024DAD1.sh</string>
@@ -8466,7 +8467,7 @@
 			<key>NS.relative</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>651</integer>
+				<integer>652</integer>
 			</dict>
 		</dict>
 		<string>file://localhost/Users/anthony/Developer/Programs/BigPond-Usage-Meter/UsageMeter.h</string>
@@ -8484,7 +8485,7 @@
 			<key>NS.relative</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>653</integer>
+				<integer>654</integer>
 			</dict>
 		</dict>
 		<string>file://localhost/Users/anthony/Developer/Programs/BigPond-Usage-Meter/UsageMeter.m</string>
