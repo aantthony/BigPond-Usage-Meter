@@ -1,0 +1,11 @@
+---
+layout: post
+title: Version 1.8 (b1e73ff)
+filesize: 648156
+version: 1.8 (b1e73ff)
+dsaSignature: MCwCFH1DV4Gn6KvURjSkm+B8YGNOUbe1AhRUQTEG7SBFQpEVk1YLgsdGVN/Ytw==
+file: http://aantthony.github.com/BigPond-Usage-Meter/download/Bigpond Menu Bar 1.8 (b1e73ff).zip
+pubdate: Sun, 19 Jun 2011 23:16:15 +1000
+---
+
+The usage meter app recently broke (for some accounts) and this update should fix it.
