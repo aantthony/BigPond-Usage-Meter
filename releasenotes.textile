@@ -1,1 +1,1 @@
-No release notes given
+The usage meter app recently broke (for some accounts) and this update should fix it.
