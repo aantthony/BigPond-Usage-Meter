@@ -3460,7 +3460,7 @@
 		</dict>
 		<string>IDEWorkspaceTabController_40F32107-8B40-413A-A122-8A5C592F579C</string>
 		<string>IDEWorkspaceWindowControllerUniqueIdentifier</string>
-		<string>{{-5, 246}, {1214, 532}}</string>
+		<string>{{-34, 200}, {1214, 532}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5087,7 +5087,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/anthony/Developer/Programs/BigPond-Usage-Meter/Bigpond%20Menu%20Bar.xcodeproj/</string>
-		<real>330182004.56788599</real>
+		<real>330182472.69479197</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5280,7 +5280,7 @@
 			<key>NS.objects</key>
 			<array/>
 		</dict>
-		<string>{0, 611}</string>
+		<string>{0, 666}</string>
 		<string>Bigpond Menu Bar</string>
 		<string>Xcode.Xcode3ProjectSupport.EditorDocument.Xcode3Project</string>
 		<dict>
@@ -6333,7 +6333,7 @@
 				<integer>486</integer>
 			</dict>
 		</dict>
-		<real>330182004.56599301</real>
+		<real>330182472.69309902</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6484,7 +6484,7 @@
 			<key>NS.objects</key>
 			<array/>
 		</dict>
-		<string>{0, 611}</string>
+		<string>{0, 666}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
