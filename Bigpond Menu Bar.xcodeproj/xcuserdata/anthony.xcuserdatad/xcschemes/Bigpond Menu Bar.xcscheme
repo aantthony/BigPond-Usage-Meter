@@ -15,7 +15,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D1107260486CEB800E47090"
                BuildableName = "Bigpond Menu Bar.app"
-               BlueprintName = "Bigpond Menu Bar Debug"
+               BlueprintName = "Bigpond Menu Bar"
                ReferencedContainer = "container:Bigpond Menu Bar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,14 +34,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
+      buildConfiguration = "Distribution"
       enablesOpenGLESFrameCapture = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
             BuildableName = "Bigpond Menu Bar.app"
-            BlueprintName = "Bigpond Menu Bar Debug"
+            BlueprintName = "Bigpond Menu Bar"
             ReferencedContainer = "container:Bigpond Menu Bar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -58,7 +58,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
             BuildableName = "Bigpond Menu Bar.app"
-            BlueprintName = "Bigpond Menu Bar Debug"
+            BlueprintName = "Bigpond Menu Bar"
             ReferencedContainer = "container:Bigpond Menu Bar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
