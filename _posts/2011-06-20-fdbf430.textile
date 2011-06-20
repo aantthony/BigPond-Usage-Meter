@@ -1,0 +1,11 @@
+---
+layout: post
+title: Version 1.9 (c51ef6a)
+filesize: 648253
+version: 1.9 (c51ef6a)
+dsaSignature: MCwCFBglHDtSdUMBEAi4PoAhJcR52/wmAhRK4Sisv7lKddBisCgsRpLbjDXPUQ==
+file: http://aantthony.github.com/BigPond-Usage-Meter/download/Bigpond Menu Bar 1.9 (c51ef6a).zip
+pubdate: Mon, 20 Jun 2011 11:17:35 +1000
+---
+
+Fixed a bug where the total usage did not include the upload usage.
