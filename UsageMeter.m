@@ -342,27 +342,36 @@ NSMutableArray *js_used, *js_date,*js_unmetered,*js_upload,*js_download;
 				//This code will not work
 				index=[top rangeOfString:@"<td class=\"tdLeftNoWrap\"><strong>Total</strong></td>"];
 			}
-			
+			int junepage=0;
 			NSString *bused;
             if(index.location == NSNotFound){
                 index = [top rangeOfString:@"<strong>Total</strong></td>"];
+                junepage=1;
             }
             
             bused = [top substringWithRange:NSMakeRange(index.location+index.length,200)];                
-			
 			//this just skips through to the right column, which is the TOTAL BILLED USAGE,
             NSRange boldfontbeginrange=[bused rangeOfString:@"<b>"];
             NSRange boldfontendrange=[bused rangeOfString:@"</b>"];
             if(boldfontendrange.location == NSNotFound || boldfontbeginrange.location == NSNotFound){
                 
                 boldfontbeginrange=[bused rangeOfString:@"<strong>"];
-                boldfontendrange=[bused rangeOfString:@"</strong>"];
-
-            }
-            int boldfontbegin=boldfontbeginrange.location+boldfontbeginrange.length;
-            int boldfontend=boldfontendrange.location;
+                bused = [bused substringFromIndex:boldfontbeginrange.location+boldfontbeginrange.length];
+                boldfontbeginrange=[bused rangeOfString:@"<strong>"];
+                bused = [bused substringFromIndex:boldfontbeginrange.location+boldfontbeginrange.length];
+                boldfontbeginrange=[bused rangeOfString:@"<strong>"];
+                boldfontendrange = [bused rangeOfString:@"</strong>" options:NSLiteralSearch range:NSMakeRange(boldfontbeginrange.location, [bused length]-boldfontbeginrange.location)];
                 
-            bused = [bused substringWithRange:NSMakeRange(boldfontbegin, boldfontend-boldfontbegin)];
+                
+                bused = [bused substringWithRange:NSMakeRange(boldfontbeginrange.location+boldfontbeginrange.length, boldfontendrange.location-(boldfontbeginrange.location+boldfontbeginrange.length))];
+                
+                boldfontendrange=[bused rangeOfString:@"</strong>"];
+                
+            }else{
+                bused = [bused substringWithRange:NSMakeRange(boldfontbeginrange.location+boldfontbeginrange.length, boldfontendrange.location-(boldfontbeginrange.location+boldfontbeginrange.length))];
+            }
+                
+            
 
             iused=[[bused stringByReplacingOccurrencesOfString:@" " withString:@""] intValue];
 			

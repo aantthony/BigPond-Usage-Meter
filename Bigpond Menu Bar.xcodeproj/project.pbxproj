@@ -378,6 +378,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = macosx;
 			};
 			name = Distribution;
@@ -480,6 +481,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -494,6 +496,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -509,7 +512,7 @@
 				927CB4801261706A0024DAD1 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Bigpond Menu Bar Debug" */ = {
 			isa = XCConfigurationList;
@@ -519,7 +522,7 @@
 				927CB45612616A390024DAD1 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Bigpond Menu Bar" */ = {
 			isa = XCConfigurationList;
@@ -529,7 +532,7 @@
 				927CB45512616A390024DAD1 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
 	};

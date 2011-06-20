@@ -1,1 +1,1 @@
-No release notes given.
+Fixed a bug where the total usage did not include the upload usage.
