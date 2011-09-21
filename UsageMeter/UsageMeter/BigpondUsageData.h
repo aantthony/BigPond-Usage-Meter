@@ -1,6 +1,6 @@
 /*
  
- UMAppDelegate.h
+ BigpondUsageData.h
  UsageMeter
  
  Created by Anthony Foster on 21/09/11.
@@ -25,15 +25,48 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  
- */
+*/
 
-#import <Cocoa/Cocoa.h>
-#import "UMUsageInfo.h"
+#ifndef UsageMeter_BigpondUsageData_h
+#define UsageMeter_BigpondUsageData_h
 
-@interface UMAppDelegate : NSObject <NSApplicationDelegate>{
-    
-}
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/HTMLparser.h>
+#include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
 
-@property (assign) IBOutlet NSWindow *window;
+#define UM_MAX_DAYS 40
+#define UM_NUM_FIELDS 5
 
-@end
+enum UMError{
+    UMError_OK=0,
+    UMError_CouldNotLoadHTML,
+    UMError_CouldNotEvaluateExpression,
+    UMError_CouldNotCreateXPathContext,
+    UMError_NullNodeSet,
+    UMError_DateFieldMissing,
+    UMError_FieldsMissing,
+    UMError_TotalsFieldsMissing,
+    UMError_TableNotFound,
+    UMError_TooManyTablesFound,
+    UMError_DateParseError
+} UMError;
+
+typedef union {
+    struct {
+        int date, download, upload, total, unmetered;
+    };
+    int value[UM_NUM_FIELDS];
+} UMDailyUsageData;
+
+typedef struct {
+    UMDailyUsageData daily[UM_MAX_DAYS];
+    int count;
+} UMUsageData;
+
+enum UMError UMUsageDataFromHTML  (const char *buffer,
+                                   int buffer_size,
+                                   UMUsageData * result);
+
+#endif

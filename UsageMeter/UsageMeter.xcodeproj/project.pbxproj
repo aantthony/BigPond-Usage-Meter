@@ -13,6 +13,10 @@
 		920850351429A14100502D63 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 920850331429A14100502D63 /* Credits.rtf */; };
 		920850381429A14100502D63 /* UMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 920850371429A14100502D63 /* UMAppDelegate.m */; };
 		9208503B1429A14100502D63 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 920850391429A14100502D63 /* MainMenu.xib */; };
+		920850461429A34F00502D63 /* BigPond.icns in Resources */ = {isa = PBXBuildFile; fileRef = 920850451429A34F00502D63 /* BigPond.icns */; };
+		920850491429A5A100502D63 /* UMUsageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 920850481429A5A100502D63 /* UMUsageInfo.m */; };
+		920850521429C0D500502D63 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 920850511429C0D400502D63 /* libxml2.dylib */; };
+		924387261429D9A10001E586 /* BigpondUsageData.c in Sources */ = {isa = PBXBuildFile; fileRef = 924387251429D9A10001E586 /* BigpondUsageData.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +25,20 @@
 		920850271429A14100502D63 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		920850281429A14100502D63 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		920850291429A14100502D63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		9208502C1429A14100502D63 /* UsageMeter-Info.plist */ = {isa = PBXFileReference; path = "UsageMeter-Info.plist"; sourceTree = "<group>"; };
+		9208502C1429A14100502D63 /* UsageMeter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UsageMeter-Info.plist"; sourceTree = "<group>"; };
 		9208502E1429A14100502D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		920850301429A14100502D63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		920850321429A14100502D63 /* UsageMeter-Prefix.pch */ = {isa = PBXFileReference; path = "UsageMeter-Prefix.pch"; sourceTree = "<group>"; };
+		920850321429A14100502D63 /* UsageMeter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UsageMeter-Prefix.pch"; sourceTree = "<group>"; };
 		920850341429A14100502D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		920850361429A14100502D63 /* UMAppDelegate.h */ = {isa = PBXFileReference; path = UMAppDelegate.h; sourceTree = "<group>"; };
+		920850361429A14100502D63 /* UMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMAppDelegate.h; sourceTree = "<group>"; };
 		920850371429A14100502D63 /* UMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMAppDelegate.m; sourceTree = "<group>"; };
 		9208503A1429A14100502D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		920850451429A34F00502D63 /* BigPond.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BigPond.icns; sourceTree = "<group>"; };
+		920850471429A5A100502D63 /* UMUsageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMUsageInfo.h; sourceTree = "<group>"; };
+		920850481429A5A100502D63 /* UMUsageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMUsageInfo.m; sourceTree = "<group>"; };
+		920850511429C0D400502D63 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		924387251429D9A10001E586 /* BigpondUsageData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BigpondUsageData.c; sourceTree = "<group>"; };
+		924387271429D9AE0001E586 /* BigpondUsageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigpondUsageData.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920850521429C0D500502D63 /* libxml2.dylib in Frameworks */,
 				920850251429A14100502D63 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +57,7 @@
 		920850151429A14100502D63 = {
 			isa = PBXGroup;
 			children = (
+				920850511429C0D400502D63 /* libxml2.dylib */,
 				9208502A1429A14100502D63 /* UsageMeter */,
 				920850231429A14100502D63 /* Frameworks */,
 				920850211429A14100502D63 /* Products */,
@@ -82,10 +94,14 @@
 		9208502A1429A14100502D63 /* UsageMeter */ = {
 			isa = PBXGroup;
 			children = (
+				92438738142A2BC60001E586 /* BigpondUsageData */,
+				920850451429A34F00502D63 /* BigPond.icns */,
 				920850361429A14100502D63 /* UMAppDelegate.h */,
 				920850371429A14100502D63 /* UMAppDelegate.m */,
 				920850391429A14100502D63 /* MainMenu.xib */,
 				9208502B1429A14100502D63 /* Supporting Files */,
+				920850471429A5A100502D63 /* UMUsageInfo.h */,
+				920850481429A5A100502D63 /* UMUsageInfo.m */,
 			);
 			path = UsageMeter;
 			sourceTree = "<group>";
@@ -100,6 +116,15 @@
 				920850331429A14100502D63 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		92438738142A2BC60001E586 /* BigpondUsageData */ = {
+			isa = PBXGroup;
+			children = (
+				924387251429D9A10001E586 /* BigpondUsageData.c */,
+				924387271429D9AE0001E586 /* BigpondUsageData.h */,
+			);
+			name = BigpondUsageData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +181,7 @@
 				9208502F1429A14100502D63 /* InfoPlist.strings in Resources */,
 				920850351429A14100502D63 /* Credits.rtf in Resources */,
 				9208503B1429A14100502D63 /* MainMenu.xib in Resources */,
+				920850461429A34F00502D63 /* BigPond.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +194,8 @@
 			files = (
 				920850311429A14100502D63 /* main.m in Sources */,
 				920850381429A14100502D63 /* UMAppDelegate.m in Sources */,
+				920850491429A5A100502D63 /* UMUsageInfo.m in Sources */,
+				924387261429D9A10001E586 /* BigpondUsageData.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +279,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -262,6 +291,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -287,6 +317,7 @@
 				920850401429A14100502D63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

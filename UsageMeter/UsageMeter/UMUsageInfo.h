@@ -1,6 +1,6 @@
 /*
  
- UMAppDelegate.h
+ UMUsageInfo.h
  UsageMeter
  
  Created by Anthony Foster on 21/09/11.
@@ -26,14 +26,18 @@
  THE SOFTWARE.
  
  */
+#import <Foundation/Foundation.h>
+#import <CoreFoundation/CFDate.h>
+#import "BigpondUsageData.h"
 
-#import <Cocoa/Cocoa.h>
-#import "UMUsageInfo.h"
-
-@interface UMAppDelegate : NSObject <NSApplicationDelegate>{
-    
+@interface UMUsageInfo : NSObject {
+    @protected
+    int megaBytesUsed;
+    @private
+    NSArray *dailyUsage;
 }
 
-@property (assign) IBOutlet NSWindow *window;
+- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password;
++ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password;
 
 @end
