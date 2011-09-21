@@ -1,0 +1,294 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		920850251429A14100502D63 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 920850241429A14100502D63 /* Cocoa.framework */; };
+		9208502F1429A14100502D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9208502D1429A14100502D63 /* InfoPlist.strings */; };
+		920850311429A14100502D63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 920850301429A14100502D63 /* main.m */; };
+		920850351429A14100502D63 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 920850331429A14100502D63 /* Credits.rtf */; };
+		920850381429A14100502D63 /* UMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 920850371429A14100502D63 /* UMAppDelegate.m */; };
+		9208503B1429A14100502D63 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 920850391429A14100502D63 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		920850201429A14100502D63 /* UsageMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsageMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		920850241429A14100502D63 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		920850271429A14100502D63 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		920850281429A14100502D63 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		920850291429A14100502D63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9208502C1429A14100502D63 /* UsageMeter-Info.plist */ = {isa = PBXFileReference; path = "UsageMeter-Info.plist"; sourceTree = "<group>"; };
+		9208502E1429A14100502D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		920850301429A14100502D63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		920850321429A14100502D63 /* UsageMeter-Prefix.pch */ = {isa = PBXFileReference; path = "UsageMeter-Prefix.pch"; sourceTree = "<group>"; };
+		920850341429A14100502D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		920850361429A14100502D63 /* UMAppDelegate.h */ = {isa = PBXFileReference; path = UMAppDelegate.h; sourceTree = "<group>"; };
+		920850371429A14100502D63 /* UMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMAppDelegate.m; sourceTree = "<group>"; };
+		9208503A1429A14100502D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9208501D1429A14100502D63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				920850251429A14100502D63 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		920850151429A14100502D63 = {
+			isa = PBXGroup;
+			children = (
+				9208502A1429A14100502D63 /* UsageMeter */,
+				920850231429A14100502D63 /* Frameworks */,
+				920850211429A14100502D63 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		920850211429A14100502D63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				920850201429A14100502D63 /* UsageMeter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		920850231429A14100502D63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				920850241429A14100502D63 /* Cocoa.framework */,
+				920850261429A14100502D63 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		920850261429A14100502D63 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				920850271429A14100502D63 /* AppKit.framework */,
+				920850281429A14100502D63 /* CoreData.framework */,
+				920850291429A14100502D63 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		9208502A1429A14100502D63 /* UsageMeter */ = {
+			isa = PBXGroup;
+			children = (
+				920850361429A14100502D63 /* UMAppDelegate.h */,
+				920850371429A14100502D63 /* UMAppDelegate.m */,
+				920850391429A14100502D63 /* MainMenu.xib */,
+				9208502B1429A14100502D63 /* Supporting Files */,
+			);
+			path = UsageMeter;
+			sourceTree = "<group>";
+		};
+		9208502B1429A14100502D63 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9208502C1429A14100502D63 /* UsageMeter-Info.plist */,
+				9208502D1429A14100502D63 /* InfoPlist.strings */,
+				920850301429A14100502D63 /* main.m */,
+				920850321429A14100502D63 /* UsageMeter-Prefix.pch */,
+				920850331429A14100502D63 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9208501F1429A14100502D63 /* UsageMeter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9208503E1429A14100502D63 /* Build configuration list for PBXNativeTarget "UsageMeter" */;
+			buildPhases = (
+				9208501C1429A14100502D63 /* Sources */,
+				9208501D1429A14100502D63 /* Frameworks */,
+				9208501E1429A14100502D63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UsageMeter;
+			productName = UsageMeter;
+			productReference = 920850201429A14100502D63 /* UsageMeter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		920850171429A14100502D63 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Anthony Foster";
+			};
+			buildConfigurationList = 9208501A1429A14100502D63 /* Build configuration list for PBXProject "UsageMeter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 920850151429A14100502D63;
+			productRefGroup = 920850211429A14100502D63 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9208501F1429A14100502D63 /* UsageMeter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9208501E1429A14100502D63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9208502F1429A14100502D63 /* InfoPlist.strings in Resources */,
+				920850351429A14100502D63 /* Credits.rtf in Resources */,
+				9208503B1429A14100502D63 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9208501C1429A14100502D63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				920850311429A14100502D63 /* main.m in Sources */,
+				920850381429A14100502D63 /* UMAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9208502D1429A14100502D63 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9208502E1429A14100502D63 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		920850331429A14100502D63 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				920850341429A14100502D63 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		920850391429A14100502D63 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9208503A1429A14100502D63 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9208503C1429A14100502D63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9208503D1429A14100502D63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9208503F1429A14100502D63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
+				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		920850401429A14100502D63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
+				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9208501A1429A14100502D63 /* Build configuration list for PBXProject "UsageMeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9208503C1429A14100502D63 /* Debug */,
+				9208503D1429A14100502D63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9208503E1429A14100502D63 /* Build configuration list for PBXNativeTarget "UsageMeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9208503F1429A14100502D63 /* Debug */,
+				920850401429A14100502D63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 920850171429A14100502D63 /* Project object */;
+}
