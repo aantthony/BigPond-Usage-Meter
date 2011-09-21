@@ -1,3 +1,5 @@
+## This program is currently broken due to changes in the way usage information is display on the Bigpond website. A new version is being made. Please help out - It's in the "new" branch.
+
 ## Monitor your BigPond usage on your Mac
 This is a BigPond usage meter menu bar item for Mac OS X. It sits up in the top right near the clock. It monitors how much you have downloaded and uploaded (your usage) and the percent of the month or billing cycle.
 
