@@ -63,6 +63,7 @@ typedef union {
 typedef struct {
     UMDailyUsageData daily[UM_MAX_DAYS];
     int count;
+    int plan;
 } UMUsageData;
 
 enum UMError UMUsageDataFromHTML  (const char *buffer,

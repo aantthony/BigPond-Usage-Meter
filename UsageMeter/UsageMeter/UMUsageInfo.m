@@ -38,8 +38,43 @@ NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
 - (void) dealloc{
     NSLog(@"I was dealloced!");
 }
+- (id) alloc{
+    
+    NSLog(@"I was alloced!");
+    return self;
+}
 
-- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password{
+NSString * stringForError(int UMError);
+NSString * stringForError(int UMError){
+    switch (UMError) {
+        case UMError_CouldNotCreateXPathContext:
+            return @"CouldNotCreateXPathContext";
+        case UMError_CouldNotEvaluateExpression:
+            return @"UMError_CouldNotEvaluateExpression";
+        case UMError_CouldNotLoadHTML:
+            return @"UMError_CouldNotLoadHTML";
+        case UMError_DateFieldMissing:
+            return @"UMError_DateFieldMissing";
+        case UMError_DateParseError:
+            return @"UMError_DateParseError";
+        case UMError_FieldsMissing:
+            return @"UMError_FieldsMissing";
+        case UMError_NullNodeSet:
+            return @"UMError_NullNodeSet";
+        case UMError_TableNotFound:
+            return @"UMError_TableNotFound";
+        case UMError_TooManyTablesFound:
+            return @"UMError_TooManyTablesFound";
+        case UMError_TotalsFieldsMissing:
+            return @"UMError_TotalsFieldsMissing";
+            
+        case UMError_OK:
+        default:
+            return @"";
+        
+    }
+}
+- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(NSString **)error{
     
     if((self = [super init])){
         
@@ -65,30 +100,72 @@ NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
         NSError *err = nil;
         
         NSData *data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &err];
-        
         if(!data){
             NSLog(@"%@",[NSString stringWithFormat:@"No data?: %@",[err localizedDescription]]);
+            *error = [err localizedDescription];
+            return nil;
         }
         if(!response){
-            NSLog(@"No response??");
+            *error = @"Blank Response";
+            return nil;
         }
         
-        UMUsageData usage;
         int UMError = UMUsageDataFromHTML([data bytes], (int)[data length], &usage);
         if(UMError){
-            
+            NSString *name= stringForError(UMError);
+            NSString *d = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [d autorelease];
+            [NSException raise:name format:@"Error: %@ (%d)\n\n\n\n Data: %@", name, UMError, d];
         }
     }
     return self;
 }
 
-+ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password{
-    UMUsageInfo *ui = [[UMUsageInfo alloc] initWithUser:username password:password];
++ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password error:(NSString **) error{
+    UMUsageInfo *ui = [[UMUsageInfo alloc] initWithUser:username password:password error: error];
     [ui autorelease];
     
     return ui;
 }
 
+- (double) plan{
+    return usage.plan;
+}
+- (double) used{
+    return usage.daily[usage.count].total;
+}
+- (double) daysLeft{
+    return 3.0;
+}
+- (double) percentage{
+    return 100.0*[self used]/[self plan];
+}
+- (double) daysInBillingPeriod{
+    return 30.0;
+}
+- (double) daysInMonth{
+    return 30.0;
+}
+- (double) billingPeriodStartDate{
+    return usage.daily[0].date;
+}
 
+- (double) dayOfMonth{
+	NSInteger dayi;
+	
+	NSCalendar *calendar= [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSCalendarUnit unitFlags = NSDayCalendarUnit;
+	NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:[NSDate date]];
+	dayi= [dateComponents day];
+	[calendar release];
+	return dayi;
+}
 
+- (double) dayOfBillingPeriod{
+    return (int)([self dayOfMonth]+[self daysInMonth]-[self billingPeriodStartDate])%(int)[self daysInMonth];
+}
+
+- (double) monthPercentage{
+    return 100.0*[self dayOfBillingPeriod]/[self daysInBillingPeriod];
+}
 @end

@@ -99,6 +99,8 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
         daily[dayIndex].date = 0;
     }
     
+    result->plan = 200000;
+    
     //Find the main daily usage table:
     xPathQuery q = query((xmlNodePtr)doc, "//table[@cellpadding = '3' and not(@class='usageScale')]", &err);
     if(q.count == 1) {

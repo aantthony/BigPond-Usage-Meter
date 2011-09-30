@@ -17,6 +17,13 @@
 		920850491429A5A100502D63 /* UMUsageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 920850481429A5A100502D63 /* UMUsageInfo.m */; };
 		920850521429C0D500502D63 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 920850511429C0D400502D63 /* libxml2.dylib */; };
 		924387261429D9A10001E586 /* BigpondUsageData.c in Sources */ = {isa = PBXBuildFile; fileRef = 924387251429D9A10001E586 /* BigpondUsageData.c */; };
+		92CD6F6014355B9E00C6AF25 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD6F5F14355B9E00C6AF25 /* Security.framework */; };
+		92CD6F6714355C1700C6AF25 /* UMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CD6F6614355C1700C6AF25 /* UMKeychain.m */; };
+		92CD6F6E143566AB00C6AF25 /* LoginItemsAE.c in Sources */ = {isa = PBXBuildFile; fileRef = 92CD6F6C143566AB00C6AF25 /* LoginItemsAE.c */; };
+		92CD6F7214356E4500C6AF25 /* bp.png in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F6F14356E4500C6AF25 /* bp.png */; };
+		92CD6F7314356E4500C6AF25 /* fade.png in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F7014356E4500C6AF25 /* fade.png */; };
+		92CD6F7414356E4500C6AF25 /* fail.png in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F7114356E4500C6AF25 /* fail.png */; };
+		92CD6F78143570E100C6AF25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F77143570E000C6AF25 /* dsa_pub.pem */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +46,15 @@
 		920850511429C0D400502D63 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		924387251429D9A10001E586 /* BigpondUsageData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BigpondUsageData.c; sourceTree = "<group>"; };
 		924387271429D9AE0001E586 /* BigpondUsageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigpondUsageData.h; sourceTree = "<group>"; };
+		92CD6F5F14355B9E00C6AF25 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		92CD6F6514355C1700C6AF25 /* UMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMKeychain.h; sourceTree = "<group>"; };
+		92CD6F6614355C1700C6AF25 /* UMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMKeychain.m; sourceTree = "<group>"; };
+		92CD6F6C143566AB00C6AF25 /* LoginItemsAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LoginItemsAE.c; sourceTree = "<group>"; };
+		92CD6F6D143566AB00C6AF25 /* LoginItemsAE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItemsAE.h; sourceTree = "<group>"; };
+		92CD6F6F14356E4500C6AF25 /* bp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bp.png; sourceTree = "<group>"; };
+		92CD6F7014356E4500C6AF25 /* fade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fade.png; sourceTree = "<group>"; };
+		92CD6F7114356E4500C6AF25 /* fail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fail.png; sourceTree = "<group>"; };
+		92CD6F77143570E000C6AF25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CD6F6014355B9E00C6AF25 /* Security.framework in Frameworks */,
 				920850521429C0D500502D63 /* libxml2.dylib in Frameworks */,
 				920850251429A14100502D63 /* Cocoa.framework in Frameworks */,
 			);
@@ -57,7 +74,6 @@
 		920850151429A14100502D63 = {
 			isa = PBXGroup;
 			children = (
-				920850511429C0D400502D63 /* libxml2.dylib */,
 				9208502A1429A14100502D63 /* UsageMeter */,
 				920850231429A14100502D63 /* Frameworks */,
 				920850211429A14100502D63 /* Products */,
@@ -75,6 +91,8 @@
 		920850231429A14100502D63 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				920850511429C0D400502D63 /* libxml2.dylib */,
+				92CD6F5F14355B9E00C6AF25 /* Security.framework */,
 				920850241429A14100502D63 /* Cocoa.framework */,
 				920850261429A14100502D63 /* Other Frameworks */,
 			);
@@ -94,14 +112,16 @@
 		9208502A1429A14100502D63 /* UsageMeter */ = {
 			isa = PBXGroup;
 			children = (
+				92CD6F7514356E4800C6AF25 /* Resources */,
+				92CD6F6C143566AB00C6AF25 /* LoginItemsAE.c */,
+				92CD6F6D143566AB00C6AF25 /* LoginItemsAE.h */,
+				92CD6F6214355BC300C6AF25 /* Shared */,
 				92438738142A2BC60001E586 /* BigpondUsageData */,
 				920850451429A34F00502D63 /* BigPond.icns */,
 				920850361429A14100502D63 /* UMAppDelegate.h */,
 				920850371429A14100502D63 /* UMAppDelegate.m */,
 				920850391429A14100502D63 /* MainMenu.xib */,
 				9208502B1429A14100502D63 /* Supporting Files */,
-				920850471429A5A100502D63 /* UMUsageInfo.h */,
-				920850481429A5A100502D63 /* UMUsageInfo.m */,
 			);
 			path = UsageMeter;
 			sourceTree = "<group>";
@@ -125,6 +145,36 @@
 				924387271429D9AE0001E586 /* BigpondUsageData.h */,
 			);
 			name = BigpondUsageData;
+			sourceTree = "<group>";
+		};
+		92CD6F6214355BC300C6AF25 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				920850471429A5A100502D63 /* UMUsageInfo.h */,
+				920850481429A5A100502D63 /* UMUsageInfo.m */,
+				92CD6F6514355C1700C6AF25 /* UMKeychain.h */,
+				92CD6F6614355C1700C6AF25 /* UMKeychain.m */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		92CD6F7514356E4800C6AF25 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				92CD6F77143570E000C6AF25 /* dsa_pub.pem */,
+				92CD6F7614356E4D00C6AF25 /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		92CD6F7614356E4D00C6AF25 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				92CD6F6F14356E4500C6AF25 /* bp.png */,
+				92CD6F7014356E4500C6AF25 /* fade.png */,
+				92CD6F7114356E4500C6AF25 /* fail.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +232,10 @@
 				920850351429A14100502D63 /* Credits.rtf in Resources */,
 				9208503B1429A14100502D63 /* MainMenu.xib in Resources */,
 				920850461429A34F00502D63 /* BigPond.icns in Resources */,
+				92CD6F7214356E4500C6AF25 /* bp.png in Resources */,
+				92CD6F7314356E4500C6AF25 /* fade.png in Resources */,
+				92CD6F7414356E4500C6AF25 /* fail.png in Resources */,
+				92CD6F78143570E100C6AF25 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +250,8 @@
 				920850381429A14100502D63 /* UMAppDelegate.m in Sources */,
 				920850491429A5A100502D63 /* UMUsageInfo.m in Sources */,
 				924387261429D9A10001E586 /* BigpondUsageData.c in Sources */,
+				92CD6F6714355C1700C6AF25 /* UMKeychain.m in Sources */,
+				92CD6F6E143566AB00C6AF25 /* LoginItemsAE.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,10 +34,17 @@
     @protected
     int megaBytesUsed;
     @private
-    NSArray *dailyUsage;
+    UMUsageData usage;
 }
 
-- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password;
-+ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password;
+- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(NSString **)error;
++ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password error:(NSString **)error;
 
+
+
+- (double) plan;
+- (double) used;
+- (double) daysLeft;
+- (double) percentage;
+- (double) monthPercentage;
 @end
