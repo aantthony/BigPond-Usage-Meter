@@ -48,7 +48,9 @@
         int used;
         double percentage;
         double monthpercent;
+        int error;
     } usage;
+    
 }
 
 @property (assign) IBOutlet NSWindow *window;

@@ -206,8 +206,7 @@ int			kShowModeIconOnly			= 1;
     if(startupIndex == -1) {
         return YES;
     }
-    err = LIAERemove(startupIndex);
-    
+    /* err = */ LIAERemove(startupIndex);
     if([self doesRunAtStartup]) {
         NSLog(@"Still going to run at startup.");
         return NO;
@@ -271,6 +270,23 @@ int			kShowModeIconOnly			= 1;
 - (BOOL) updateInBackgroundCompleted: (id) sender{
     NSLog(@"BUpdate completed");
     
+    if(usage.error){
+        NSAlert * alert;
+        switch (usage.error) {
+            case UMError_InvalidPassword:
+                alert = [NSAlert alertWithMessageText:@"Invalid Username/Password combination" defaultButton:@"Re-enter password" alternateButton:@"Ignore" otherButton:nil informativeTextWithFormat:@"e"];
+                break;
+            case UMError_InternetOffline:
+                
+                break;
+            default:
+                break;
+        }
+        if(alert){
+            [alert runModal];
+            
+        }
+    }
     if(YES){
         [_usedMeter setDoubleValue:usage.percentage];
 		[_timeMeter setDoubleValue:usage.monthpercent];
@@ -304,16 +320,18 @@ int			kShowModeIconOnly			= 1;
 	//get usage info
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:kPreferenceKeyNameUsername];
     NSString *password = [[UMKeychain standardKeychain] passwordForUsername:username];
-    NSString * error;
+    int error;
     UMUsageInfo *usageInfo = [UMUsageInfo usageInfoWithUser:username password:password error: &error];
     if(!usageInfo){
-        NSLog(@"error: %@", error);
+        usage.error = error;
+    }else{
+        usage.monthpercent = [usageInfo monthPercentage];
+        usage.used = [usageInfo used];
+        usage.plan = [usageInfo plan];
+        usage.percentage = [usageInfo percentage];
+        usage.error = UMError_OK;
+        
     }
-    
-    usage.monthpercent = [usageInfo monthPercentage];
-    usage.used = [usageInfo used];
-    usage.plan = [usageInfo plan];
-    usage.percentage = [usageInfo percentage];
     
     [autoreleasepool drain];
 	

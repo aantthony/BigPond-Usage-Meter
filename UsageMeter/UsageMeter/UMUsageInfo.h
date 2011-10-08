@@ -37,8 +37,7 @@
     UMUsageData usage;
 }
 
-- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(NSString **)error;
-+ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password error:(NSString **)error;
++ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password error:(int *)error;
 
 
 

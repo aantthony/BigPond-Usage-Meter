@@ -30,12 +30,6 @@
 #ifndef UsageMeter_BigpondUsageData_h
 #define UsageMeter_BigpondUsageData_h
 
-#include <libxml/tree.h>
-#include <libxml/parser.h>
-#include <libxml/HTMLparser.h>
-#include <libxml/xpath.h>
-#include <libxml/xpathInternals.h>
-
 #define UM_MAX_DAYS 40
 #define UM_NUM_FIELDS 5
 
@@ -50,7 +44,10 @@ enum UMError{
     UMError_TotalsFieldsMissing,
     UMError_TableNotFound,
     UMError_TooManyTablesFound,
-    UMError_DateParseError
+    UMError_DateParseError,
+    UMError_InvalidPassword,
+    UMError_InternetOffline,
+    UMError_AccountLocked
 } UMError;
 
 typedef union {

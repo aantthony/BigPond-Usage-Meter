@@ -30,7 +30,6 @@
 #import "UMUsageInfo.h"
 NSString * const kUsageMeterGotoURL = @"https://my.bigpond.com/mybigpond/myaccount/myusage/daily/default.do";
 NSString * const kUsageMeterPostURL = @"https://signon.bigpond.com/login";
-//NSString * const kUsageMeterPostURL = @"http://localhost/test.html";
 NSString * const kUsageMeterUA      = @"Mozilla/5.0 (Macintosh; U; en-us) UsageMeterDataUpdater/3.0";
 NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
 
@@ -44,8 +43,7 @@ NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
     return self;
 }
 
-NSString * stringForError(int UMError);
-NSString * stringForError(int UMError){
++ (NSString *) stringForError:(int) UMError{
     switch (UMError) {
         case UMError_CouldNotCreateXPathContext:
             return @"CouldNotCreateXPathContext";
@@ -67,15 +65,38 @@ NSString * stringForError(int UMError){
             return @"UMError_TooManyTablesFound";
         case UMError_TotalsFieldsMissing:
             return @"UMError_TotalsFieldsMissing";
-            
+        case UMError_InvalidPassword:
+            return @"Invalid Username/Password Combination";
         case UMError_OK:
         default:
             return @"";
         
     }
 }
-- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(NSString **)error{
-    
+
+BOOL isFatal(int err);
+BOOL isFatal(int err){
+    switch (UMError) {
+        case UMError_CouldNotCreateXPathContext:
+        case UMError_CouldNotEvaluateExpression:
+        case UMError_CouldNotLoadHTML:
+        case UMError_DateFieldMissing:
+        case UMError_DateParseError:
+        case UMError_FieldsMissing:
+        case UMError_NullNodeSet:
+        case UMError_TableNotFound:
+        case UMError_TooManyTablesFound:
+        case UMError_TotalsFieldsMissing:
+            return YES;
+        case UMError_InvalidPassword:
+        case UMError_OK:
+        default:
+            return NO;
+            
+    }
+                
+}
+- (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(int *)error{
     if((self = [super init])){
         
         NSString * post = [NSString stringWithFormat:@"username=%@&password=%@&goto=%@&encoded=false&gx_charset=UTF-8",
@@ -98,30 +119,34 @@ NSString * stringForError(int UMError){
         
         NSHTTPURLResponse *response=nil;
         NSError *err = nil;
-        
+        *error = 0;
         NSData *data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &err];
         if(!data){
             NSLog(@"%@",[NSString stringWithFormat:@"No data?: %@",[err localizedDescription]]);
-            *error = [err localizedDescription];
-            return nil;
+            if([err code] == -1009){
+                *error = UMError_InternetOffline;
+            }
+        }else if(!response){
+            *error = 10000;
         }
-        if(!response){
-            *error = @"Blank Response";
-            return nil;
+        if(!*error){
+            *error = UMUsageDataFromHTML([data bytes], (int)[data length], &usage);
         }
-        
-        int UMError = UMUsageDataFromHTML([data bytes], (int)[data length], &usage);
-        if(UMError){
-            NSString *name= stringForError(UMError);
-            NSString *d = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [d autorelease];
-            [NSException raise:name format:@"Error: %@ (%d)\n\n\n\n Data: %@", name, UMError, d];
+        if(*error){
+            if(isFatal(*error)){
+                NSString *name= [UMUsageInfo stringForError:*error];
+                NSString *d = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                [d autorelease];
+                [NSException raise:name format:@"Error: %@ (%d)\n\n\n\n Data: %@", name, *error, d];
+            }else{
+                return nil;
+            }
         }
     }
     return self;
 }
 
-+ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password error:(NSString **) error{
++ (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password error:(int *)error{
     UMUsageInfo *ui = [[UMUsageInfo alloc] initWithUser:username password:password error: error];
     [ui autorelease];
     

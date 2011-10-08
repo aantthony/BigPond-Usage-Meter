@@ -29,6 +29,14 @@
 
 #include "BigpondUsageData.h"
 
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/HTMLparser.h>
+#include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
+
+#include <string.h>
+
 typedef struct{
     xmlXPathContextPtr context;
     xmlXPathObjectPtr object;
@@ -54,17 +62,26 @@ xPathQuery query(xmlNodePtr doc, const char * query_s, int *err) {
         return q;
     }
     if(!(q.object->nodesetval)) {
-        *err=UMError_NullNodeSet;
-        return q;
+        //*err=UMError_NullNodeSet;
+        q.count = 0;
+    }else{
+        q.nodes = q.object->nodesetval->nodeTab;
+        q.count = q.object->nodesetval->nodeNr;
+        
+        if(q.count==0){
+            xmlXPathFreeObject(q.object);
+            xmlXPathFreeContext(q.context);
+        }
     }
-    q.nodes = q.object->nodesetval->nodeTab;
-    q.count = q.object->nodesetval->nodeNr;
-    
     return q;
 }
 void doneQuery(xPathQuery q) {
+    if(q.count == 0){
+        return;
+    }
     xmlXPathFreeObject(q.object);
     xmlXPathFreeContext(q.context);
+    q.count = 0;
 }
 
 #pragma mark -
@@ -80,6 +97,29 @@ int parseDateNode(xmlNodePtr node, int *err) {
         *err = UMError_DateParseError;
     }
     return day;
+}
+int str_str_l(const char * haystack, const char * needle, int haystack_size);
+int str_str_l(const char * haystack, const char * needle, int haystack_size){
+    int start = 0;
+    int len=0;
+    int a;
+    while(1){
+        while(1){
+            if(start+len>=haystack_size){
+                return -1;
+            }
+            a = haystack[start+len];
+            if(!needle[len]){
+                return start;
+            }else if(a == needle[len]){
+                len++;
+            }else{
+                len=0;
+                break;
+            }
+        }
+        start++;
+    }
 }
 #pragma mark -
 #pragma mark Exposed Methods
@@ -163,7 +203,31 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
         
     } else if(q.count == 0) {
         err = UMError_TableNotFound;
-        //xPathQuery errors = query((xmlNodePtr)doc, "//span::desec", &err);
+        xPathQuery errors = query((xmlNodePtr)doc, "//span[@class = 'desktopError']/p", &err);
+        int error_id;
+        if(errors.count){
+            for(error_id=0;error_id<errors.count;error_id++){
+                if(errors.nodes[error_id]->children != NULL){
+                    char * message = (char*)errors.nodes[error_id]->children[0].content;
+                    if(strcmp("All items marked with an asterisk ( * ) are required to be filled out.", message) == 0){
+                        
+                    }else if(strcmp("Your username/password combination is incorrect or incomplete.", message) == 0){
+                        err = UMError_InvalidPassword;
+                    }else{
+                        printf("Unknown Error: %s\n", message);
+                    }
+                }
+            }
+        }else{
+            //Bigpond has a "</>" in the account locked page, and I don't know what that means, so here we will do a string search:
+            //for 'account has been temporarily locked'
+            
+            int b = str_str_l(buffer,"account has been temporarily locked", buffer_size);
+            if(b != -1){
+                err = UMError_AccountLocked;
+            }
+        }
+        doneQuery(errors);
         //TODO: Check for errors, such as wrong password.
         
     } else {
