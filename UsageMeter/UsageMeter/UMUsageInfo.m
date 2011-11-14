@@ -34,14 +34,6 @@ NSString * const kUsageMeterUA      = @"Mozilla/5.0 (Macintosh; U; en-us) UsageM
 NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
 
 @implementation UMUsageInfo
-- (void) dealloc{
-    NSLog(@"I was dealloced!");
-}
-- (id) alloc{
-    
-    NSLog(@"I was alloced!");
-    return self;
-}
 
 + (NSString *) stringForError:(int) UMError{
     switch (UMError) {

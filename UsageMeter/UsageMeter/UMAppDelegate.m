@@ -1,36 +1,16 @@
-/*
- 
- UMAppDelegate.m
- UsageMeter
- 
- Created by Anthony Foster on 21/09/11.
- 
- Copyright (c) 2011 Anthony Foster.
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- 
- */
+//
+//  UMAppDelegate.m
+//  UsageMeter
+//
+//  Created by Anthony Foster on 30/09/11.
+//  Copyright (c) 2011 Anthony Foster. All rights reserved.
+//
 
 #import "UMAppDelegate.h"
 
-#import "LoginItemsAE.h"
 #import "UMKeychain.h"
+#import <ServiceManagement/ServiceManagement.h>
+
 
 @implementation UMAppDelegate
 
@@ -66,6 +46,7 @@ setShowModePercentageButton=_setShowModePercentageButton;
 NSString * const kPreferenceKeyNameUsername	= @"Username";
 NSString * const kPreferenceKeyNameInterval	= @"UpdateInterval";
 NSString * const kPreferenceKeyNameShow     = @"Show";
+NSString * const kPreferenceKeyNameRunAtStartup = @"RunAtStartup";
 
 NSString * const kImageResourceDefaultIcon	= @"bp";
 NSString * const kImageResourceFadedIcon    = @"fade";
@@ -73,8 +54,8 @@ NSString * const kImageResourceFailIcon		= @"fail";
 
 NSString * const kBundleVersionKeyName		= @"CFBundleVersion";
 
-int			kShowModePercentage			= 0;
-int			kShowModeIconOnly			= 1;
+int			kShowModePercentage             = 0;
+int			kShowModeIconOnly               = 1;
 
 
 #define SECONDS * 1
@@ -108,6 +89,7 @@ int			kShowModeIconOnly			= 1;
 								  @"Version: %@",
 								  [[[NSBundle mainBundle] infoDictionary] objectForKey:kBundleVersionKeyName]]];
     [self loadPreferences];
+    [self showDeadMenu];
     [self update:nil];
     
 }
@@ -119,7 +101,6 @@ int			kShowModeIconOnly			= 1;
     
 	[_statusItem setImage:[NSImage imageNamed:kImageResourceFadedIcon]];
 	[_statusItem setHighlightMode:YES];
-    
     
     if([self doesRunAtStartup]){
         [_runAtStartupCheckBox setState:NSOnState];
@@ -134,85 +115,47 @@ int			kShowModeIconOnly			= 1;
 
 #pragma mark -
 #pragma mark Startup
-- (BOOL) doesRunAtStartup {
-	NSString *thisURL = [[NSBundle mainBundle] bundlePath];
-	OSStatus 			err;
-	NSArray *			items;
-	CFIndex				itemCount;
-	items = NULL;
-	
-	err = LIAECopyLoginItems((CFArrayRef*)&items);
-	if (err == noErr) {
-		itemCount = [items count];
-		for(int i=0;i<itemCount;i++){
-			NSDictionary *dict;
-			dict=[items objectAtIndex:i];
-			NSURL *url = [dict valueForKey:@"URL"];
-			NSString* str = [url path];
-			if([thisURL isEqualToString:str]){
-				[items release];
-				return YES;
-			}
-		}
+- (void)setStartAtLogin:(BOOL)enabled {
+	// Creating helper app complete URL
+    if(![[[NSBundle mainBundle] bundlePath] isEqualToString:@"/Applications/UsageMeter.app"]){
+        NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please rename this application to \"UsageMeter\" and ensure it is stored in the Applications folder."];
+        [alert runModal];
+       /* if(button == NSAlertDefaultReturn){
+            [_window makeKeyAndOrderFront:nil];
+        }
+        */
+
+        return;
+    }
+	NSURL *url = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:
+                  @"Contents/Library/LoginItems/UsageMeterHelper.app"];
+    
+	// Registering helper app
+    OSStatus err;
+	if ((err = LSRegisterURL((CFURLRef)url, true)) != noErr) {
+		NSLog(@"LSRegisterURL failed: %d!", err);
+        NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"LSRegisterURL failed: %d", err];
+        [alert runModal];
+        
 	}
-	[items release];
+    
+	// Setting login
+	if (!SMLoginItemSetEnabled((CFStringRef)@"com.aantthony.UsageMeterHelper",
+                               enabled)) {
+        NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"SMLoginItemSetEnabled failed"];
+        [alert runModal];
+		NSLog(@"SMLoginItemSetEnabled failed!");
+	}
+    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kPreferenceKeyNameRunAtStartup];
+}
+
+- (BOOL) doesRunAtStartup {
+    BOOL runAtStartup = [[NSUserDefaults standardUserDefaults] boolForKey:kPreferenceKeyNameRunAtStartup];
+    return runAtStartup;
+    //TODO
 	return NO;
 }
 
-- (BOOL)getFSRef:(FSRef *)aFSRef forString:(NSString *)string {
-	return FSPathMakeRef((const UInt8 *)[string UTF8String], aFSRef,NULL) == noErr;
-}
-- (BOOL) createStartupEntry {
-	
-	FSRef item;
-	if(![self getFSRef:&item forString:[[NSBundle mainBundle] bundlePath]]){
-        NSLog(@"ERROR!!!");
-		return NO;
-	}
-	
-	Boolean hideIt=NO;
-	int err=0;
-	if((err=LIAEAddRefAtEnd(&item,hideIt))){
-        NSLog(@"ERROR!!");
-		return NO;
-	}
-	return YES;
-}
-- (BOOL) deleteStartupEntry {
-	int startupIndex = -1;
-    NSString *thisURL = [[NSBundle mainBundle] bundlePath];
-    OSStatus 			err;
-    NSArray *			items;
-    CFIndex				itemCount;
-    items = NULL;
-        
-    err = LIAECopyLoginItems((CFArrayRef*)&items);
-    if (err == noErr) {
-        itemCount = [items count];
-        for(int i = 0; i < itemCount; i++){
-            NSDictionary *dict;
-            dict=[items objectAtIndex:i];
-            NSURL *url = [dict valueForKey:@"URL"];
-            NSString* str = [url path];
-            if([thisURL isEqualToString:str]){
-                startupIndex = i;
-                break;
-            }
-        }
-    }
-    
-    [items release];
-        
-    if(startupIndex == -1) {
-        return YES;
-    }
-    /* err = */ LIAERemove(startupIndex);
-    if([self doesRunAtStartup]) {
-        NSLog(@"Still going to run at startup.");
-        return NO;
-    }
-	return YES;
-}
 #pragma mark -
 #pragma mark Timer
 
@@ -226,11 +169,12 @@ int			kShowModeIconOnly			= 1;
         [updateTimer invalidate];
         [updateTimer release];
     }
-	updateTimer=[[NSTimer scheduledTimerWithTimeInterval: [self timerInterval]
+	updateTimer=[[NSTimer scheduledTimerWithTimeInterval: [self timerInterval]/10
 												  target: self
 												selector: @selector(update:)
 												userInfo: nil
 		  										 repeats: YES] retain];
+    NSLog(@"Timer configured to fire every %f seconds", [self timerInterval]/10);
 	
 }
 - (NSString *) timeString{
@@ -271,10 +215,10 @@ int			kShowModeIconOnly			= 1;
     NSLog(@"BUpdate completed");
     
     if(usage.error){
-        NSAlert * alert;
+        NSAlert * alert=nil;
         switch (usage.error) {
             case UMError_InvalidPassword:
-                alert = [NSAlert alertWithMessageText:@"Invalid Username/Password combination" defaultButton:@"Re-enter password" alternateButton:@"Ignore" otherButton:nil informativeTextWithFormat:@"e"];
+                alert = [NSAlert alertWithMessageText:@"Invalid Username/Password combination" defaultButton:@"Re-enter password" alternateButton:nil otherButton:nil informativeTextWithFormat:@"e"];
                 break;
             case UMError_InternetOffline:
                 
@@ -283,8 +227,10 @@ int			kShowModeIconOnly			= 1;
                 break;
         }
         if(alert){
-            [alert runModal];
-            
+            NSInteger button = [alert runModal];
+            if(button == NSAlertDefaultReturn){
+                [_window makeKeyAndOrderFront:nil];
+            }
         }
     }
     if(YES){
@@ -320,6 +266,7 @@ int			kShowModeIconOnly			= 1;
 	//get usage info
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:kPreferenceKeyNameUsername];
     NSString *password = [[UMKeychain standardKeychain] passwordForUsername:username];
+    //NSLog(@"password: %@", password);
     int error;
     UMUsageInfo *usageInfo = [UMUsageInfo usageInfoWithUser:username password:password error: &error];
     if(!usageInfo){
@@ -384,19 +331,14 @@ int			kShowModeIconOnly			= 1;
     [_loginWindow orderOut:nil];
     [NSApp endSheet:_loginWindow];
     [self performLogin];
-    [self deleteStartupEntry];
     
     [_runAtStartupCheckBox2 setState: [_runAtStartupCheckBox state]];
-    if([_runAtStartupCheckBox state] == NSOnState){
-        [self createStartupEntry];
-    }
+    [self setStartAtLogin:[_runAtStartupCheckBox state] == NSOnState];
 }
 - (IBAction)changeRunAtStartupCheckbox2:(id)sender{
     [_runAtStartupCheckBox setState: [_runAtStartupCheckBox2 state]];
-    [self deleteStartupEntry];
-    if([_runAtStartupCheckBox state] == NSOnState){
-        [self createStartupEntry];
-    }
+    [self setStartAtLogin:[_runAtStartupCheckBox state] == NSOnState];
+    
     
 }
 #pragma mark User Interface (Preferences)
@@ -422,10 +364,43 @@ int			kShowModeIconOnly			= 1;
 	
 	[self configureTimer];
 }
-
-- (IBAction) update:(id)sender {
+- (IBAction) showPreferences:(id)sender{
+    //TODO: Should this launch another app?
+    [NSApp activateIgnoringOtherApps:YES];
+    [_window makeKeyAndOrderFront:nil];
+}
+- (void) showDeadMenu{
     
+    [_usedMeter setDoubleValue:0.0];
+    [_timeMeter setDoubleValue:0.0];
+    [_usedLabel setStringValue:@""];
+    
+    //Memory Leak?
+    [self setStatusText:@""];
+    
+    [_percentOfMonthLabel setStringValue:@""];
+    [_timeLabel setStringValue:@""];
+    
+    [_freeLabel setStringValue:@""];
+    
+    [_updateMenuItem setTitle:@"Update"];
+    [_statusItem setImage:[NSImage imageNamed:kImageResourceDefaultIcon]];
+
+}
+- (IBAction) update:(id)sender {
+    NSLog(@"BUpdate Begin");
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:kPreferenceKeyNameUsername];
+    if(username == nil){
+        //Username pref isn't set: Must be first run.
+        
+        [_signInStatusLabel setStringValue:[NSString stringWithFormat:@"Account: %@", @"(none)"]];
+        [_userLabel setStringValue:NSLocalizedString(@"Not Signed In", @"email for when not signed in")];
+        
+        [self showDeadMenu];
+        [self showPreferences:nil];
+        [self showLogin:nil];
+        return;
+    }
 	[_signInStatusLabel setStringValue:[NSString stringWithFormat:@"Account: %@", username]];
     [_userLabel setStringValue:username];
     if(!_inConnection){

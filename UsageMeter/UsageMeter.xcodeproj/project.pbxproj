@@ -17,14 +17,28 @@
 		920850491429A5A100502D63 /* UMUsageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 920850481429A5A100502D63 /* UMUsageInfo.m */; };
 		920850521429C0D500502D63 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 920850511429C0D400502D63 /* libxml2.dylib */; };
 		924387261429D9A10001E586 /* BigpondUsageData.c in Sources */ = {isa = PBXBuildFile; fileRef = 924387251429D9A10001E586 /* BigpondUsageData.c */; };
+		924591B0146D208F00CCA4B0 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924591AF146D208F00CCA4B0 /* ServiceManagement.framework */; };
 		92CD6F6014355B9E00C6AF25 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD6F5F14355B9E00C6AF25 /* Security.framework */; };
 		92CD6F6714355C1700C6AF25 /* UMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CD6F6614355C1700C6AF25 /* UMKeychain.m */; };
-		92CD6F6E143566AB00C6AF25 /* LoginItemsAE.c in Sources */ = {isa = PBXBuildFile; fileRef = 92CD6F6C143566AB00C6AF25 /* LoginItemsAE.c */; };
 		92CD6F7214356E4500C6AF25 /* bp.png in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F6F14356E4500C6AF25 /* bp.png */; };
 		92CD6F7314356E4500C6AF25 /* fade.png in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F7014356E4500C6AF25 /* fade.png */; };
 		92CD6F7414356E4500C6AF25 /* fail.png in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F7114356E4500C6AF25 /* fail.png */; };
 		92CD6F78143570E100C6AF25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F77143570E000C6AF25 /* dsa_pub.pem */; };
+		92EBBC3E146DE9DE00D3D9AD /* UsageMeterHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92EBBC3D146DE9DA00D3D9AD /* UsageMeterHelper.app */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		92965687146D3196009D02E4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				92EBBC3E146DE9DE00D3D9AD /* UsageMeterHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		920850201429A14100502D63 /* UsageMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsageMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,15 +60,17 @@
 		920850511429C0D400502D63 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		924387251429D9A10001E586 /* BigpondUsageData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BigpondUsageData.c; sourceTree = "<group>"; };
 		924387271429D9AE0001E586 /* BigpondUsageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigpondUsageData.h; sourceTree = "<group>"; };
+		924591AC146D135000CCA4B0 /* UsageMeter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UsageMeter.entitlements; sourceTree = "<group>"; };
+		924591AD146D19FD00CCA4B0 /* BigPond.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BigPond.icns; sourceTree = "<group>"; };
+		924591AF146D208F00CCA4B0 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		92CD6F5F14355B9E00C6AF25 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		92CD6F6514355C1700C6AF25 /* UMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMKeychain.h; sourceTree = "<group>"; };
 		92CD6F6614355C1700C6AF25 /* UMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMKeychain.m; sourceTree = "<group>"; };
-		92CD6F6C143566AB00C6AF25 /* LoginItemsAE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LoginItemsAE.c; sourceTree = "<group>"; };
-		92CD6F6D143566AB00C6AF25 /* LoginItemsAE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginItemsAE.h; sourceTree = "<group>"; };
 		92CD6F6F14356E4500C6AF25 /* bp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bp.png; sourceTree = "<group>"; };
 		92CD6F7014356E4500C6AF25 /* fade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fade.png; sourceTree = "<group>"; };
 		92CD6F7114356E4500C6AF25 /* fail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fail.png; sourceTree = "<group>"; };
 		92CD6F77143570E000C6AF25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		92EBBC3D146DE9DA00D3D9AD /* UsageMeterHelper.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = UsageMeterHelper.app; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				924591B0146D208F00CCA4B0 /* ServiceManagement.framework in Frameworks */,
 				92CD6F6014355B9E00C6AF25 /* Security.framework in Frameworks */,
 				920850521429C0D500502D63 /* libxml2.dylib in Frameworks */,
 				920850251429A14100502D63 /* Cocoa.framework in Frameworks */,
@@ -74,6 +91,7 @@
 		920850151429A14100502D63 = {
 			isa = PBXGroup;
 			children = (
+				924591AD146D19FD00CCA4B0 /* BigPond.icns */,
 				9208502A1429A14100502D63 /* UsageMeter */,
 				920850231429A14100502D63 /* Frameworks */,
 				920850211429A14100502D63 /* Products */,
@@ -102,6 +120,7 @@
 		920850261429A14100502D63 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				924591AF146D208F00CCA4B0 /* ServiceManagement.framework */,
 				920850271429A14100502D63 /* AppKit.framework */,
 				920850281429A14100502D63 /* CoreData.framework */,
 				920850291429A14100502D63 /* Foundation.framework */,
@@ -112,9 +131,9 @@
 		9208502A1429A14100502D63 /* UsageMeter */ = {
 			isa = PBXGroup;
 			children = (
+				92EBBC3D146DE9DA00D3D9AD /* UsageMeterHelper.app */,
+				924591AC146D135000CCA4B0 /* UsageMeter.entitlements */,
 				92CD6F7514356E4800C6AF25 /* Resources */,
-				92CD6F6C143566AB00C6AF25 /* LoginItemsAE.c */,
-				92CD6F6D143566AB00C6AF25 /* LoginItemsAE.h */,
 				92CD6F6214355BC300C6AF25 /* Shared */,
 				92438738142A2BC60001E586 /* BigpondUsageData */,
 				920850451429A34F00502D63 /* BigPond.icns */,
@@ -184,6 +203,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9208503E1429A14100502D63 /* Build configuration list for PBXNativeTarget "UsageMeter" */;
 			buildPhases = (
+				92965687146D3196009D02E4 /* CopyFiles */,
 				9208501C1429A14100502D63 /* Sources */,
 				9208501D1429A14100502D63 /* Frameworks */,
 				9208501E1429A14100502D63 /* Resources */,
@@ -251,7 +271,6 @@
 				920850491429A5A100502D63 /* UMUsageInfo.m in Sources */,
 				924387261429D9A10001E586 /* BigpondUsageData.c in Sources */,
 				92CD6F6714355C1700C6AF25 /* UMKeychain.m in Sources */,
-				92CD6F6E143566AB00C6AF25 /* LoginItemsAE.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +352,8 @@
 		9208503F1429A14100502D63 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = UsageMeter/UsageMeter.entitlements;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
@@ -345,6 +366,9 @@
 		920850401429A14100502D63 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = UsageMeter/UsageMeter.entitlements;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
