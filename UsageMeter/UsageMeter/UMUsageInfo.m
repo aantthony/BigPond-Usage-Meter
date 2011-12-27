@@ -133,7 +133,7 @@ stringByReplacingOccurrencesOfString:@"9" withString:@"1"];
     NSError *err;
     
     NSURL * path = [fileManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:&err];
-    NSURL *dumpFolder = [path URLByAppendingPathComponent:@"UsageMeter" isDirectory:YES];
+    NSURL *dumpFolder = [path URLByAppendingPathComponent:@"UsageMeter"];
     NSString *dstring = [dumpFolder path];
     NSDateFormatter *formatter;
     NSString        *dateString;
