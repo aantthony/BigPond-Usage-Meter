@@ -28,6 +28,23 @@
 		92EBBC3E146DE9DE00D3D9AD /* UsageMeterHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92EBBC3D146DE9DA00D3D9AD /* UsageMeterHelper.app */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		05A7FF6C14A9F4DB00C3661E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A7FF6414A9F4DB00C3661E /* UsageMeterHelper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 924591BC146D21F700CCA4B0;
+			remoteInfo = UsageMeterHelper;
+		};
+		05A7FF6F14A9F4EE00C3661E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A7FF6414A9F4DB00C3661E /* UsageMeterHelper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 924591BB146D21F700CCA4B0;
+			remoteInfo = UsageMeterHelper;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		92965687146D3196009D02E4 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -42,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05A7FF6414A9F4DB00C3661E /* UsageMeterHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UsageMeterHelper.xcodeproj; path = Helper/UsageMeterHelper/UsageMeterHelper.xcodeproj; sourceTree = "<group>"; };
 		920850201429A14100502D63 /* UsageMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UsageMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920850241429A14100502D63 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		920850271429A14100502D63 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -91,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05A7FF6514A9F4DB00C3661E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05A7FF6D14A9F4DB00C3661E /* UsageMeterHelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		920850151429A14100502D63 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +124,7 @@
 				9208502A1429A14100502D63 /* UsageMeter */,
 				920850231429A14100502D63 /* Frameworks */,
 				920850211429A14100502D63 /* Products */,
+				05A7FF6414A9F4DB00C3661E /* UsageMeterHelper.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,6 +243,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				05A7FF7014A9F4EE00C3661E /* PBXTargetDependency */,
 			);
 			name = UsageMeter;
 			productName = UsageMeter;
@@ -241,12 +269,28 @@
 			mainGroup = 920850151429A14100502D63;
 			productRefGroup = 920850211429A14100502D63 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 05A7FF6514A9F4DB00C3661E /* Products */;
+					ProjectRef = 05A7FF6414A9F4DB00C3661E /* UsageMeterHelper.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9208501F1429A14100502D63 /* UsageMeter */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		05A7FF6D14A9F4DB00C3661E /* UsageMeterHelper.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = UsageMeterHelper.app;
+			remoteRef = 05A7FF6C14A9F4DB00C3661E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9208501E1429A14100502D63 /* Resources */ = {
@@ -282,6 +326,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		05A7FF7014A9F4EE00C3661E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UsageMeterHelper;
+			targetProxy = 05A7FF6F14A9F4EE00C3661E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		9208502D1429A14100502D63 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -314,7 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -330,9 +382,8 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -340,7 +391,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -350,8 +401,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Release;
 		};
@@ -359,13 +409,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = UsageMeter/UsageMeter.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Anthony Foster";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "42AA2F8D-8855-46C4-B93F-B5B36C962A74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -374,14 +422,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = UsageMeter/UsageMeter.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Anthony Foster";
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "42AA2F8D-8855-46C4-B93F-B5B36C962A74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
