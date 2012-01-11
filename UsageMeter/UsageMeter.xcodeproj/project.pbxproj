@@ -18,6 +18,7 @@
 		920850521429C0D500502D63 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 920850511429C0D400502D63 /* libxml2.dylib */; };
 		924387261429D9A10001E586 /* BigpondUsageData.c in Sources */ = {isa = PBXBuildFile; fileRef = 924387251429D9A10001E586 /* BigpondUsageData.c */; };
 		924591B0146D208F00CCA4B0 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924591AF146D208F00CCA4B0 /* ServiceManagement.framework */; };
+		927F93DD14BD2A59003D4DD2 /* AppLoginItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 927F93DC14BD2A59003D4DD2 /* AppLoginItem.m */; };
 		92CD6F6014355B9E00C6AF25 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CD6F5F14355B9E00C6AF25 /* Security.framework */; };
 		92CD6F6714355C1700C6AF25 /* UMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CD6F6614355C1700C6AF25 /* UMKeychain.m */; };
 		92CD6F7214356E4500C6AF25 /* bp.png in Resources */ = {isa = PBXBuildFile; fileRef = 92CD6F6F14356E4500C6AF25 /* bp.png */; };
@@ -63,6 +64,8 @@
 		924591AC146D135000CCA4B0 /* UsageMeter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UsageMeter.entitlements; sourceTree = "<group>"; };
 		924591AD146D19FD00CCA4B0 /* BigPond.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BigPond.icns; sourceTree = "<group>"; };
 		924591AF146D208F00CCA4B0 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		927F93DB14BD2A59003D4DD2 /* AppLoginItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLoginItem.h; sourceTree = "<group>"; };
+		927F93DC14BD2A59003D4DD2 /* AppLoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLoginItem.m; sourceTree = "<group>"; };
 		92CD6F5F14355B9E00C6AF25 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		92CD6F6514355C1700C6AF25 /* UMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMKeychain.h; sourceTree = "<group>"; };
 		92CD6F6614355C1700C6AF25 /* UMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMKeychain.m; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 				920850371429A14100502D63 /* UMAppDelegate.m */,
 				920850391429A14100502D63 /* MainMenu.xib */,
 				9208502B1429A14100502D63 /* Supporting Files */,
+				927F93DB14BD2A59003D4DD2 /* AppLoginItem.h */,
+				927F93DC14BD2A59003D4DD2 /* AppLoginItem.m */,
 			);
 			path = UsageMeter;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 				920850491429A5A100502D63 /* UMUsageInfo.m in Sources */,
 				924387261429D9A10001E586 /* BigpondUsageData.c in Sources */,
 				92CD6F6714355C1700C6AF25 /* UMKeychain.m in Sources */,
+				927F93DD14BD2A59003D4DD2 /* AppLoginItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,12 +359,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = UsageMeter/UsageMeter.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer: Anthony Foster (FGRL3U7U3G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "76890844-5B13-4C0B-9EAD-097F232CBE5C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -367,13 +374,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = UsageMeter/UsageMeter.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Anthony Foster";
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "42AA2F8D-8855-46C4-B93F-B5B36C962A74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

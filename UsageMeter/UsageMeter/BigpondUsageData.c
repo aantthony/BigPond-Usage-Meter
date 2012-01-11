@@ -213,13 +213,16 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
                         
                     }else if(strcmp("Your username/password combination is incorrect or incomplete.", message) == 0){
                         err = UMError_InvalidPassword;
+                        break;
+                    }else if(strcmp("Don't forget to check:", message) == 0){
+                        //Useless error message.
                     }else{
                         printf("Unknown Error: %s\n", message);
                     }
                 }
             }
         }else{
-            //Bigpond has a "</>" in the account locked page, and I don't know what that means, so here we will do a string search:
+            //Bigpond has a "</>" in the account locked page, and I don't know what that means, so here we we'll do a string search:
             //for 'account has been temporarily locked'
             
             int b = str_str_l(buffer,"account has been temporarily locked", buffer_size);
@@ -233,6 +236,7 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
     } else {
         err = UMError_TooManyTablesFound;
     }
+    
     doneQuery(q);
     //TODO: find usage limits, account information.
     

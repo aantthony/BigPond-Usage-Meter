@@ -251,12 +251,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = UsageMeterHelper/UsageMeterHelper.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Anthony Foster";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeterHelper/UsageMeterHelper-Prefix.pch";
 				INFOPLIST_FILE = "UsageMeterHelper/UsageMeterHelper-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "402E906F-4B6B-487B-9574-56CF7598206F";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -265,12 +265,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = UsageMeterHelper/UsageMeterHelper.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Anthony Foster";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeterHelper/UsageMeterHelper-Prefix.pch";
 				INFOPLIST_FILE = "UsageMeterHelper/UsageMeterHelper-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "402E906F-4B6B-487B-9574-56CF7598206F";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

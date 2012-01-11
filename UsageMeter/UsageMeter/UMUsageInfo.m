@@ -32,8 +32,25 @@ NSString * const kUsageMeterGotoURL = @"https://my.bigpond.com/mybigpond/myaccou
 NSString * const kUsageMeterPostURL = @"https://signon.bigpond.com/login";
 NSString * const kUsageMeterUA      = @"Mozilla/5.0 (Macintosh; U; en-us) UsageMeterDataUpdater/3.0";
 NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
-
+int const dumpErrorAnywayDebug = 0;
 @implementation UMUsageInfo
+/*
+ 
+ UMError_OK=0,
+ UMError_CouldNotLoadHTML,
+ UMError_CouldNotEvaluateExpression,
+ UMError_CouldNotCreateXPathContext,
+ UMError_NullNodeSet,
+ UMError_DateFieldMissing,
+ UMError_FieldsMissing,
+ UMError_TotalsFieldsMissing,
+ UMError_TableNotFound,
+ UMError_TooManyTablesFound,
+ UMError_DateParseError,
+ UMError_InvalidPassword,
+ UMError_InternetOffline,
+ UMError_AccountLocked
+ */
 
 + (NSString *) stringForError:(int) UMError{
     switch (UMError) {
@@ -59,6 +76,10 @@ NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
             return @"UMError_TotalsFieldsMissing";
         case UMError_InvalidPassword:
             return @"Invalid Username/Password Combination";
+        case UMError_InternetOffline:
+            return @"Internet Offline";
+        case UMError_AccountLocked:
+            return @"Account Locked";
         case UMError_OK:
         default:
             return @"";
@@ -68,7 +89,7 @@ NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
 
 BOOL isFatal(int err);
 BOOL isFatal(int err){
-    switch (UMError) {
+    switch (err) {
         case UMError_CouldNotCreateXPathContext:
         case UMError_CouldNotEvaluateExpression:
         case UMError_CouldNotLoadHTML:
@@ -87,6 +108,56 @@ BOOL isFatal(int err){
             
     }
                 
+}
+
+- (NSString *)protectPrivateData:(NSString *)input{
+    return [[[[[[[[input stringByReplacingOccurrencesOfString:@"0" withString:@"1"]
+    stringByReplacingOccurrencesOfString:@"2" withString:@"1"]
+    stringByReplacingOccurrencesOfString:@"4" withString:@"1"]
+    stringByReplacingOccurrencesOfString:@"5" withString:@"1"]
+    stringByReplacingOccurrencesOfString:@"6" withString:@"1"]
+    stringByReplacingOccurrencesOfString:@"7" withString:@"1"]
+    stringByReplacingOccurrencesOfString:@"8" withString:@"1"]
+stringByReplacingOccurrencesOfString:@"9" withString:@"1"];
+}
+- (void)dumpErrorReport:(NSString *)errorname data:(NSData *)data{
+    
+    if(errorname == nil){
+        errorname = @"No Error";
+    }
+    
+    
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    
+
+    NSError *err;
+    
+    NSURL * path = [fileManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:&err];
+    NSURL *dumpFolder = [path URLByAppendingPathComponent:@"UsageMeter" isDirectory:YES];
+    NSString *dstring = [dumpFolder path];
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy-HH-mm"];
+    
+    dateString = [formatter stringFromDate:[NSDate date]];
+    
+    [formatter release];
+    
+    NSURL *u_Data = [dumpFolder URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", dateString]];
+    NSURL *u_Info = [dumpFolder URLByAppendingPathComponent:[NSString stringWithFormat:@"%@-info.txt", dateString]];
+    [fileManager createDirectoryAtPath:(NSString *)dstring withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *d = [self protectPrivateData:[NSString stringWithUTF8String:[data bytes]]];
+    NSData * mdata = [d dataUsingEncoding:NSUTF8StringEncoding];
+    if(![mdata writeToURL:u_Data options:NSDataWritingAtomic error:&err]){
+        NSLog(@"%@", err);
+    }
+    NSData *ndata = [errorname dataUsingEncoding:NSUTF8StringEncoding];
+    if(![ndata writeToURL:u_Info options:NSDataWritingAtomic error:&err]){
+        NSLog(@"%@", err);
+    }
+    NSLog(@"Dump created.");
 }
 - (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(int *)error{
     if((self = [super init])){
@@ -124,12 +195,13 @@ BOOL isFatal(int err){
         if(!*error){
             *error = UMUsageDataFromHTML([data bytes], (int)[data length], &usage);
         }
-        if(*error){
-            if(isFatal(*error)){
+        if(*error || dumpErrorAnywayDebug){
+            if(isFatal(*error) || dumpErrorAnywayDebug){
                 NSString *name= [UMUsageInfo stringForError:*error];
                 NSString *d = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                [self dumpErrorReport:name data:data];
                 [d autorelease];
-                [NSException raise:name format:@"Error: %@ (%d)\n\n\n\n Data: %@", name, *error, d];
+                [NSException raise:name format:@"Error: %@ (%d)\n\n\n\n Data: START DATA%@END DATA", name, *error, d];
             }else{
                 return nil;
             }

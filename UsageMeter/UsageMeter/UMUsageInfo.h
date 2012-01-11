@@ -39,6 +39,7 @@
 
 + (UMUsageInfo *) usageInfoWithUser:(NSString*)username password:(NSString*)password error:(int *)error;
 
++ (NSString *) stringForError:(int) UMError;
 
 
 - (double) plan;

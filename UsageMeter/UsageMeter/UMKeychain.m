@@ -33,7 +33,7 @@ NSString * kPath    = @"";
     [self removePasswordForUsername:username];
 
 	if (password.length){
-        SecKeychainAddInternetPassword(NULL,
+        OSStatus err = SecKeychainAddInternetPassword(NULL,
                                        stringByteLength(kServer), [kServer UTF8String],
                                        0, NULL,
                                        stringByteLength(username), [username UTF8String],
@@ -43,6 +43,7 @@ NSString * kPath    = @"";
                                        stringByteLength(password), [password UTF8String],
                                        NULL
                                        );
+        NSLog(@"SecKeychainAddInternetPassword: %d", err);
     }
 }
 - (NSString *) passwordForUsername:(NSString *) username{
@@ -64,6 +65,9 @@ NSString * kPath    = @"";
 	if (status == noErr){
 		string = [[NSString alloc] initWithBytes:(const void *)password length:passwordLength encoding:NSUTF8StringEncoding];
         SecKeychainItemFreeContent(NULL, password);
+    }else{
+        NSLog(@"SecKeychainFindInternetPassword: %@", SecCopyErrorMessageString(status, NULL));
+        return nil;
     }
     return [string autorelease];
 }

@@ -9,8 +9,7 @@
 #import "UMAppDelegate.h"
 
 #import "UMKeychain.h"
-#import <ServiceManagement/ServiceManagement.h>
-
+#import "AppLoginItem.h"
 
 @implementation UMAppDelegate
 
@@ -46,13 +45,15 @@ setShowModePercentageButton=_setShowModePercentageButton;
 NSString * const kPreferenceKeyNameUsername	= @"Username";
 NSString * const kPreferenceKeyNameInterval	= @"UpdateInterval";
 NSString * const kPreferenceKeyNameShow     = @"Show";
-NSString * const kPreferenceKeyNameRunAtStartup = @"RunAtStartup";
+//NSString * const kPreferenceKeyNameRunAtStartup = @"RunAtStartup";
 
 NSString * const kImageResourceDefaultIcon	= @"bp";
 NSString * const kImageResourceFadedIcon    = @"fade";
 NSString * const kImageResourceFailIcon		= @"fail";
 
 NSString * const kBundleVersionKeyName		= @"CFBundleVersion";
+
+NSString * const kHelperAppBundleID         = @"com.aantthony.UsageMeterHelper";
 
 int			kShowModePercentage             = 0;
 int			kShowModeIconOnly               = 1;
@@ -61,13 +62,11 @@ int			kShowModeIconOnly               = 1;
 #define SECONDS * 1
 #define MINUTES * 60 SECONDS
 
-
 - (void)dealloc {
     [super dealloc];
 }
 
 - (void) loadPreferences{
-    
     int intervalSetting = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kPreferenceKeyNameInterval];
     switch (intervalSetting) {
         case 30 MINUTES:
@@ -82,25 +81,6 @@ int			kShowModeIconOnly               = 1;
         default:
             break;
     }
-}
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [self updateInBackgroundCompleted: nil];
-    [_versionLabel setStringValue:[NSString stringWithFormat:
-								  @"Version: %@",
-								  [[[NSBundle mainBundle] infoDictionary] objectForKey:kBundleVersionKeyName]]];
-    [self loadPreferences];
-    [self showDeadMenu];
-    [self update:nil];
-    
-}
-
--(void)awakeFromNib {
-    NSLog(@"MEMORY LEAK, awakeFromNib (statusItem retain)");
-	_statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
-	[_statusItem setMenu:_statusMenu];
-    
-	[_statusItem setImage:[NSImage imageNamed:kImageResourceFadedIcon]];
-	[_statusItem setHighlightMode:YES];
     
     if([self doesRunAtStartup]){
         [_runAtStartupCheckBox setState:NSOnState];
@@ -109,48 +89,74 @@ int			kShowModeIconOnly               = 1;
         [_runAtStartupCheckBox setState:NSOffState];
         [_runAtStartupCheckBox2 setState:NSOffState];
     }
+}
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self loadPreferences];
+    [self showDeadMenu];
+    [self update:nil];
+}
+
+-(void)awakeFromNib {
+    _inConnection = NO;
+    
+    usage.valid = NO;
+    usage.plan = usage.used = usage.error = usage.percentage = usage.monthpercent = 0;
+    
+    [_versionLabel setStringValue:[NSString stringWithFormat:
+                                   @"Version: %@",
+                                   [[[NSBundle mainBundle] infoDictionary] objectForKey:kBundleVersionKeyName]]];
+    
+	_statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
+	[_statusItem setMenu:_statusMenu];
+    
+	[_statusItem setImage:[NSImage imageNamed:kImageResourceFadedIcon]];
+	[_statusItem setHighlightMode:YES];
     
 }
 
 
 #pragma mark -
 #pragma mark Startup
+
 - (void)setStartAtLogin:(BOOL)enabled {
 	// Creating helper app complete URL
     if(![[[NSBundle mainBundle] bundlePath] isEqualToString:@"/Applications/UsageMeter.app"]){
-        NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please rename this application to \"UsageMeter\" and ensure it is stored in the Applications folder."];
-        [alert runModal];
-       /* if(button == NSAlertDefaultReturn){
-            [_window makeKeyAndOrderFront:nil];
+        if(!enabled){
+            return;
         }
-        */
-
+        NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please rename this application to \"UsageMeter\" and ensure it is stored in the /Applications folder."];
+        [alert runModal];
+        
+        [[self runAtStartupCheckBox] setState:NSOffState];
+        [[self runAtStartupCheckBox2] setState:NSOffState];
         return;
     }
 	NSURL *url = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:
                   @"Contents/Library/LoginItems/UsageMeterHelper.app"];
     
 	// Registering helper app
-    OSStatus err;
+    //OSStatus err;
+    NSLog(@"Will NOT attempt to register %@.", url);
+    /*
 	if ((err = LSRegisterURL((CFURLRef)url, true)) != noErr) {
-		NSLog(@"LSRegisterURL failed: %d!", err);
+		NSLog(@"Expected error: LSRegisterURL failed: %d! FIX THIS BUG APPLE", err);
         NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"LSRegisterURL failed: %d", err];
         [alert runModal];
-        
 	}
+    */
     
 	// Setting login
-	if (!SMLoginItemSetEnabled((CFStringRef)@"com.aantthony.UsageMeterHelper",
-                               enabled)) {
-        NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"SMLoginItemSetEnabled failed"];
-        [alert runModal];
-		NSLog(@"SMLoginItemSetEnabled failed!");
+	if (![AppLoginItem toggleBundleIDAsLoginItem: kHelperAppBundleID state: enabled]) {
+        /*NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"SMLoginItemSetEnabled failed"];
+        [alert runModal];*/
+		NSLog(@"Expected error: SMLoginItemSetEnabled failed! FIX THIS BUG APPLE");
 	}
-    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kPreferenceKeyNameRunAtStartup];
+    //[[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kPreferenceKeyNameRunAtStartup];
 }
 
 - (BOOL) doesRunAtStartup {
-    BOOL runAtStartup = [[NSUserDefaults standardUserDefaults] boolForKey:kPreferenceKeyNameRunAtStartup];
+    BOOL runAtStartup = [AppLoginItem bundleIDExistsAsLoginItem: kHelperAppBundleID];
+    //BOOL runAtStartup = [[NSUserDefaults standardUserDefaults] boolForKey:kPreferenceKeyNameRunAtStartup];
     return runAtStartup;
     //TODO
 	return NO;
@@ -162,19 +168,19 @@ int			kShowModeIconOnly               = 1;
 - (NSTimeInterval) timerInterval{
 	NSInteger setting=[[NSUserDefaults standardUserDefaults]
                        integerForKey:kPreferenceKeyNameInterval];
-    return setting?setting:30 MINUTES;
+    return setting ? setting: 30 MINUTES;
 }
 -(void) configureTimer{
     if(updateTimer){
         [updateTimer invalidate];
         [updateTimer release];
     }
-	updateTimer=[[NSTimer scheduledTimerWithTimeInterval: [self timerInterval]/10
+	updateTimer=[[NSTimer scheduledTimerWithTimeInterval: [self timerInterval]
 												  target: self
 												selector: @selector(update:)
 												userInfo: nil
 		  										 repeats: YES] retain];
-    NSLog(@"Timer configured to fire every %f seconds", [self timerInterval]/10);
+    NSLog(@"Timer configured to fire every %f seconds", [self timerInterval]);
 	
 }
 - (NSString *) timeString{
@@ -205,7 +211,11 @@ int			kShowModeIconOnly               = 1;
 	[[NSUserDefaults standardUserDefaults] setInteger:kShowModePercentage forKey:kPreferenceKeyNameShow];
 	[_setShowModeIconOnlyButton setState:NSOffState];
 	[_setShowModePercentageButton setState:NSOnState];
-	[self setStatusText:[NSString stringWithFormat:@"%d%%",(int)round(usage.percentage)]];
+    if(usage.valid){
+        [_statusItem setTitle:[NSString stringWithFormat:@"%d%%",(int)round(usage.percentage)]];
+    }else{
+        [self setStatusText:@""];
+    }
 }
 
 
@@ -214,14 +224,29 @@ int			kShowModeIconOnly               = 1;
 - (BOOL) updateInBackgroundCompleted: (id) sender{
     NSLog(@"BUpdate completed");
     
+    [_updatingIndicator stopAnimation:self];
+    _inConnection = NO;
+    NSString * failedReason = nil;
+    BOOL invalidateTimer = NO;
     if(usage.error){
-        NSAlert * alert=nil;
+        NSLog(@"Usage error: %@", [UMUsageInfo stringForError: usage.error]);
+        invalidateTimer = YES;
+        NSAlert * alert = nil;
         switch (usage.error) {
             case UMError_InvalidPassword:
-                alert = [NSAlert alertWithMessageText:@"Invalid Username/Password combination" defaultButton:@"Re-enter password" alternateButton:nil otherButton:nil informativeTextWithFormat:@"e"];
+                alert = [NSAlert alertWithMessageText:@"Incorrect Password" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The BigPond password attempted was incorrect. Configure your account in the prefernces window."];
+                failedReason = @"Invalid Password";
                 break;
-            case UMError_InternetOffline:
+            case UMError_AccountLocked:
+                /*
+                alert = [NSAlert alertWithMessageText:@"Incorrect Password" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"The BigPond password attempted was incorrect. Configure your account in the prefernces window."];
+                 */
+                failedReason = @"Account Locked";
+                break;
                 
+            case UMError_InternetOffline:
+                failedReason = @"Internet Offline";
+                invalidateTimer = NO;
                 break;
             default:
                 break;
@@ -230,10 +255,17 @@ int			kShowModeIconOnly               = 1;
             NSInteger button = [alert runModal];
             if(button == NSAlertDefaultReturn){
                 [_window makeKeyAndOrderFront:nil];
+                [self showLogin:nil];
             }
         }
+        
+        if(invalidateTimer){
+            [_statusItem setImage:[NSImage imageNamed:kImageResourceFailIcon]];
+        }else{
+            [_statusItem setImage:[NSImage imageNamed:kImageResourceFadedIcon]];
+        }
     }
-    if(YES){
+    if(usage.valid){
         [_usedMeter setDoubleValue:usage.percentage];
 		[_timeMeter setDoubleValue:usage.monthpercent];
 		[_usedLabel setStringValue:[NSString stringWithFormat:
@@ -255,9 +287,21 @@ int			kShowModeIconOnly               = 1;
         [_updateMenuItem setTitle:[NSString stringWithFormat:@"Update Now - Last: %@",[self timeString]]];
         [_statusItem setImage:[NSImage imageNamed:kImageResourceDefaultIcon]];
         
+    }else{
+        if(failedReason){
+            
+            [_updateMenuItem setTitle:[NSString stringWithFormat:@"Update - %@", failedReason]];
+        }else{
+            [_updateMenuItem setTitle:[NSString stringWithFormat:@"Update - Last attempt failed"]];
+        }
     }
-    [_updatingIndicator stopAnimation:self];
-    _inConnection = NO;
+    if(invalidateTimer){
+        [updateTimer invalidate];
+        NSLog(@"THE RETAIN COUNT IS %lu", [updateTimer retainCount]);
+        assert([updateTimer retainCount] == 1);
+        [updateTimer release];
+        updateTimer = nil;
+    }
     return YES;
 }
 
@@ -266,18 +310,20 @@ int			kShowModeIconOnly               = 1;
 	//get usage info
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:kPreferenceKeyNameUsername];
     NSString *password = [[UMKeychain standardKeychain] passwordForUsername:username];
-    //NSLog(@"password: %@", password);
+    NSLog(@"Updating: username: %@", username);
+    assert((password!=nil) && (username!=nil));
     int error;
     UMUsageInfo *usageInfo = [UMUsageInfo usageInfoWithUser:username password:password error: &error];
     if(!usageInfo){
         usage.error = error;
+        usage.valid = NO;
     }else{
         usage.monthpercent = [usageInfo monthPercentage];
         usage.used = [usageInfo used];
         usage.plan = [usageInfo plan];
         usage.percentage = [usageInfo percentage];
         usage.error = UMError_OK;
-        
+        usage.valid = YES;
     }
     
     [autoreleasepool drain];
@@ -290,14 +336,16 @@ int			kShowModeIconOnly               = 1;
 #pragma mark -
 - (void) performLogin{
     
-    NSString* username=[_usernameField stringValue];
-	NSString* password=[_passwordField stringValue];
+    NSString* username = [_usernameField stringValue];
+	NSString* password = [_passwordField stringValue];
+    
     
 	if(username.length && password.length){
         [[UMKeychain standardKeychain] setPassword:password forUsername:username];
 		[[NSUserDefaults standardUserDefaults]
          setValue:username
          forKey:kPreferenceKeyNameUsername];
+        [self showDeadMenu];
 		[self update:nil];
 	}else {
 		[self showLogin:nil];
@@ -388,7 +436,7 @@ int			kShowModeIconOnly               = 1;
 
 }
 - (IBAction) update:(id)sender {
-    NSLog(@"BUpdate Begin");
+    //NSLog(@"BUpdate Begin");
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:kPreferenceKeyNameUsername];
     if(username == nil){
         //Username pref isn't set: Must be first run.
@@ -414,6 +462,7 @@ int			kShowModeIconOnly               = 1;
 		[self performSelectorInBackground:@selector(updateInBackground:) withObject:self];
 	}else{
         //already updating...
+        //NSLog(@"ALREADY RUNNING");
     }
     
 }

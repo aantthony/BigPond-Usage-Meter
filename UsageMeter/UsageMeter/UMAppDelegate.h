@@ -27,6 +27,7 @@
         int used;
         double percentage;
         double monthpercent;
+        int valid;
         int error;
     } usage;
     
