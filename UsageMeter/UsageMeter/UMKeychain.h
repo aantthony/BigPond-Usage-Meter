@@ -13,6 +13,5 @@
 
 - (void) setPassword:(NSString *) password forUsername:(NSString *) username;
 - (NSString *) passwordForUsername:(NSString *) username;
-- (void) removePasswordForUsername:(NSString *) username;
 
 @end

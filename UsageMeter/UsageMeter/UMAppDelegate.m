@@ -97,15 +97,6 @@ int			kShowModeIconOnly               = 1;
 }
 
 -(void)awakeFromNib {
-    UMKeychain * keychain = [UMKeychain standardKeychain];
-    [keychain setPassword:@"test" forUsername:@"test_user"];
-    NSString * password = [keychain passwordForUsername:@"test_user"];
-    if([password isEqualToString:@"test"]){
-        NSLog(@"It worked");
-    }else{
-        NSLog(@"IT FAILED!!!!!");
-    }
-    exit(0);
     _inConnection = NO;
     
     usage.valid = NO;

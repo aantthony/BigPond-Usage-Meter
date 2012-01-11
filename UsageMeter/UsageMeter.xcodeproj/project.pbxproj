@@ -359,13 +359,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = UsageMeter/UsageMeter.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer: Anthony Foster (FGRL3U7U3G)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Anthony Foster";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UsageMeter/UsageMeter-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "UsageMeter/UsageMeter-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "76890844-5B13-4C0B-9EAD-097F232CBE5C";
+				PROVISIONING_PROFILE = "42AA2F8D-8855-46C4-B93F-B5B36C962A74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
