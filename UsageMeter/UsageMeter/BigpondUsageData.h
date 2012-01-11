@@ -1,0 +1,70 @@
+/*
+ 
+ BigpondUsageData.h
+ UsageMeter
+ 
+ Created by Anthony Foster on 21/09/11.
+ 
+ Copyright (c) 2011 Anthony Foster.
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+ 
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ 
+*/
+
+#ifndef UsageMeter_BigpondUsageData_h
+#define UsageMeter_BigpondUsageData_h
+
+#define UM_MAX_DAYS 40
+#define UM_NUM_FIELDS 5
+
+enum UMError{
+    UMError_OK=0,
+    UMError_CouldNotLoadHTML,
+    UMError_CouldNotEvaluateExpression,
+    UMError_CouldNotCreateXPathContext,
+    UMError_NullNodeSet,
+    UMError_DateFieldMissing,
+    UMError_FieldsMissing,
+    UMError_TotalsFieldsMissing,
+    UMError_TableNotFound,
+    UMError_TooManyTablesFound,
+    UMError_DateParseError,
+    UMError_InvalidPassword,
+    UMError_InternetOffline,
+    UMError_AccountLocked
+} UMError;
+
+typedef union {
+    struct {
+        int date, download, upload, total, unmetered;
+    };
+    int value[UM_NUM_FIELDS];
+} UMDailyUsageData;
+
+typedef struct {
+    UMDailyUsageData daily[UM_MAX_DAYS];
+    int count;
+    int plan;
+} UMUsageData;
+
+enum UMError UMUsageDataFromHTML  (const char *buffer,
+                                   int buffer_size,
+                                   UMUsageData * result);
+
+#endif
