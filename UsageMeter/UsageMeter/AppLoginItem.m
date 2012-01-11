@@ -46,7 +46,11 @@
         CFRelease((CFDictionaryRef)jobDicts); jobDicts = nil;
         return bOnDemand;
         
-    } return NO;
+    }
+    if(jobDicts != nil){
+        CFRelease((CFDictionaryRef)jobDicts); jobDicts = nil;
+    }
+    return NO;
 }
 
 @end

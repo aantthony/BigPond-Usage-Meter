@@ -131,12 +131,13 @@ int			kShowModeIconOnly               = 1;
         [[self runAtStartupCheckBox2] setState:NSOffState];
         return;
     }
-	NSURL *url = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:
+	/*NSURL *url = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:
                   @"Contents/Library/LoginItems/UsageMeterHelper.app"];
+     */
     
 	// Registering helper app
     //OSStatus err;
-    NSLog(@"Will NOT attempt to register %@.", url);
+    //NSLog(@"Will NOT attempt to register %@.", url);
     /*
 	if ((err = LSRegisterURL((CFURLRef)url, true)) != noErr) {
 		NSLog(@"Expected error: LSRegisterURL failed: %d! FIX THIS BUG APPLE", err);
@@ -149,7 +150,7 @@ int			kShowModeIconOnly               = 1;
 	if (![AppLoginItem toggleBundleIDAsLoginItem: kHelperAppBundleID state: enabled]) {
         /*NSAlert * alert = [NSAlert alertWithMessageText:@"Could not configure UsageMeter to run at startup" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"SMLoginItemSetEnabled failed"];
         [alert runModal];*/
-		NSLog(@"Expected error: SMLoginItemSetEnabled failed! FIX THIS BUG APPLE");
+		//NSLog(@"Expected error: SMLoginItemSetEnabled failed! FIX THIS BUG APPLE");
 	}
     //[[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kPreferenceKeyNameRunAtStartup];
 }
@@ -180,7 +181,7 @@ int			kShowModeIconOnly               = 1;
 												selector: @selector(update:)
 												userInfo: nil
 		  										 repeats: YES] retain];
-    NSLog(@"Timer configured to fire every %f seconds", [self timerInterval]);
+    //NSLog(@"Timer configured to fire every %f seconds", [self timerInterval]);
 	
 }
 - (NSString *) timeString{
@@ -222,14 +223,13 @@ int			kShowModeIconOnly               = 1;
 #pragma mark -
 #pragma mark Update
 - (BOOL) updateInBackgroundCompleted: (id) sender{
-    NSLog(@"BUpdate completed");
-    
+
     [_updatingIndicator stopAnimation:self];
     _inConnection = NO;
     NSString * failedReason = nil;
     BOOL invalidateTimer = NO;
     if(usage.error){
-        NSLog(@"Usage error: %@", [UMUsageInfo stringForError: usage.error]);
+        //NSLog(@"Usage error: %@", [UMUsageInfo stringForError: usage.error]);
         invalidateTimer = YES;
         NSAlert * alert = nil;
         switch (usage.error) {
@@ -297,7 +297,7 @@ int			kShowModeIconOnly               = 1;
     }
     if(invalidateTimer){
         [updateTimer invalidate];
-        NSLog(@"THE RETAIN COUNT IS %lu", [updateTimer retainCount]);
+        //NSLog(@"THE RETAIN COUNT IS %lu", [updateTimer retainCount]);
         assert([updateTimer retainCount] == 1);
         [updateTimer release];
         updateTimer = nil;
@@ -310,7 +310,7 @@ int			kShowModeIconOnly               = 1;
 	//get usage info
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:kPreferenceKeyNameUsername];
     NSString *password = [[UMKeychain standardKeychain] passwordForUsername:username];
-    NSLog(@"Updating: username: %@", username);
+    //NSLog(@"Updating: username: %@", username);
     assert((password!=nil) && (username!=nil));
     int error;
     UMUsageInfo *usageInfo = [UMUsageInfo usageInfoWithUser:username password:password error: &error];

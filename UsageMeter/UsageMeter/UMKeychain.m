@@ -96,7 +96,7 @@ NSString * kPath    = @"";
 		string = [[NSString alloc] initWithBytes:(const void *)password length:passwordLength encoding:NSUTF8StringEncoding];
         SecKeychainItemFreeContent(NULL, password);
     }else{
-        NSLog(@"SecKeychainFindInternetPassword: %@", SecCopyErrorMessageString(status, NULL));
+        //NSLog(@"SecKeychainFindInternetPassword: %@", SecCopyErrorMessageString(status, NULL));
         return nil;
     }
     return [string autorelease];
