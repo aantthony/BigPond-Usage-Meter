@@ -54,7 +54,7 @@ NSString * kPath    = @"";
         if(err == noErr){
             
         }else{
-            NSLog(@"SecKeychainItemModifyContent() failed: %d", err);
+            //NSLog(@"SecKeychainItemModifyContent() failed: %d", err);
         }
         return;
     }else{
@@ -71,7 +71,7 @@ NSString * kPath    = @"";
         if(err == noErr){
             
         }else{
-            NSLog(@"SecKeychainAddInternetPassword() failed: %d", err);
+            //NSLog(@"SecKeychainAddInternetPassword() failed: %d", err);
         }
     }
 }

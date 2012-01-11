@@ -13,34 +13,33 @@
 
 @implementation UMAppDelegate
 
-@synthesize
-window = _window,
-runAtStartupCheckBox=_runAtStartupCheckBox,
-runAtStartupCheckBox2=_runAtStartupCheckBox2,
-usernameField=_usernameField,
-passwordField=_passwordField,
-loginWindow=_loginWindow,
-statusMenu=_statusMenu,
-signInStatusLabel=_signInStatusLabel,
-updatingIndicator=_updatingIndicator,
-updateMenuItem=_updateMenuItem,
-updatePeriodPopUp=_updatePeriodPopUp;
+@synthesize window,
+runAtStartupCheckBox,
+runAtStartupCheckBox2,
+usernameField,
+passwordField,
+loginWindow,
+statusMenu,
+signInStatusLabel,
+updatingIndicator,
+updateMenuItem,
+updatePeriodPopUp;
 
 @synthesize
-percentOfMonthLabel=_percentOfMonthLabel,
-freeLabel=_freeLabel,
-usedMeter=_usedMeter,
-timeMeter=_timeMeter,
-usedLabel=_usedLabel,
-timeLabel=_timeLabel,
-userLabel=_userLabel;
+percentOfMonthLabel,
+freeLabel,
+usedMeter,
+timeMeter,
+usedLabel,
+timeLabel,
+userLabel;
 
 @synthesize
-setShowModeIconOnlyButton=_setShowModeIconOnlyButton,
-setShowModePercentageButton=_setShowModePercentageButton;
+setShowModeIconOnlyButton,
+setShowModePercentageButton;
 
 
-@synthesize versionLabel=_versionLabel;
+@synthesize versionLabel;
 
 NSString * const kPreferenceKeyNameUsername	= @"Username";
 NSString * const kPreferenceKeyNameInterval	= @"UpdateInterval";
@@ -70,24 +69,24 @@ int			kShowModeIconOnly               = 1;
     int intervalSetting = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kPreferenceKeyNameInterval];
     switch (intervalSetting) {
         case 30 MINUTES:
-            [_updatePeriodPopUp selectItemAtIndex:0];
+            [updatePeriodPopUp selectItemAtIndex:0];
             break;
         case 60 MINUTES:
-            [_updatePeriodPopUp selectItemAtIndex:1];
+            [updatePeriodPopUp selectItemAtIndex:1];
             break;
         case 120 MINUTES:
-            [_updatePeriodPopUp selectItemAtIndex:2];
+            [updatePeriodPopUp selectItemAtIndex:2];
             break;
         default:
             break;
     }
     
     if([self doesRunAtStartup]){
-        [_runAtStartupCheckBox setState:NSOnState];
-        [_runAtStartupCheckBox2 setState:NSOnState];
+        [runAtStartupCheckBox setState:NSOnState];
+        [runAtStartupCheckBox2 setState:NSOnState];
     }else{
-        [_runAtStartupCheckBox setState:NSOffState];
-        [_runAtStartupCheckBox2 setState:NSOffState];
+        [runAtStartupCheckBox setState:NSOffState];
+        [runAtStartupCheckBox2 setState:NSOffState];
     }
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -102,12 +101,12 @@ int			kShowModeIconOnly               = 1;
     usage.valid = NO;
     usage.plan = usage.used = usage.error = usage.percentage = usage.monthpercent = 0;
     
-    [_versionLabel setStringValue:[NSString stringWithFormat:
+    [versionLabel setStringValue:[NSString stringWithFormat:
                                    @"Version: %@",
                                    [[[NSBundle mainBundle] infoDictionary] objectForKey:kBundleVersionKeyName]]];
     
 	_statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
-	[_statusItem setMenu:_statusMenu];
+	[_statusItem setMenu:statusMenu];
     
 	[_statusItem setImage:[NSImage imageNamed:kImageResourceFadedIcon]];
 	[_statusItem setHighlightMode:YES];
@@ -204,14 +203,14 @@ int			kShowModeIconOnly               = 1;
 
 - (IBAction) setShowModeIconOnly:(id)sender{
 	[[NSUserDefaults standardUserDefaults] setInteger:kShowModeIconOnly forKey:kPreferenceKeyNameShow];
-	[_setShowModeIconOnlyButton setState:NSOnState];
-	[_setShowModePercentageButton setState:NSOffState];
+	[setShowModeIconOnlyButton setState:NSOnState];
+	[setShowModePercentageButton setState:NSOffState];
 	[self setStatusText:@""];
 }
 - (IBAction) setShowModePercentage:(id)sender{
 	[[NSUserDefaults standardUserDefaults] setInteger:kShowModePercentage forKey:kPreferenceKeyNameShow];
-	[_setShowModeIconOnlyButton setState:NSOffState];
-	[_setShowModePercentageButton setState:NSOnState];
+	[setShowModeIconOnlyButton setState:NSOffState];
+	[setShowModePercentageButton setState:NSOnState];
     if(usage.valid){
         [_statusItem setTitle:[NSString stringWithFormat:@"%d%%",(int)round(usage.percentage)]];
     }else{
@@ -224,7 +223,7 @@ int			kShowModeIconOnly               = 1;
 #pragma mark Update
 - (BOOL) updateInBackgroundCompleted: (id) sender{
 
-    [_updatingIndicator stopAnimation:self];
+    [updatingIndicator stopAnimation:self];
     _inConnection = NO;
     NSString * failedReason = nil;
     BOOL invalidateTimer = NO;
@@ -254,7 +253,7 @@ int			kShowModeIconOnly               = 1;
         if(alert){
             NSInteger button = [alert runModal];
             if(button == NSAlertDefaultReturn){
-                [_window makeKeyAndOrderFront:nil];
+                [window makeKeyAndOrderFront:nil];
                 [self showLogin:nil];
             }
         }
@@ -266,9 +265,9 @@ int			kShowModeIconOnly               = 1;
         }
     }
     if(usage.valid){
-        [_usedMeter setDoubleValue:usage.percentage];
-		[_timeMeter setDoubleValue:usage.monthpercent];
-		[_usedLabel setStringValue:[NSString stringWithFormat:
+        [usedMeter setDoubleValue:usage.percentage];
+		[timeMeter setDoubleValue:usage.monthpercent];
+		[usedLabel setStringValue:[NSString stringWithFormat:
 								   @"%d MB (%d%%)",
 								   usage.used,
 								   (int)(round(usage.percentage))]];
@@ -276,23 +275,23 @@ int			kShowModeIconOnly               = 1;
 		//Memory Leak?
 		[self setStatusText:[NSString stringWithFormat:@"%d%%",(int)round(usage.percentage)]];
 		
-		[_percentOfMonthLabel setStringValue:[NSString stringWithFormat:@"%d%%",(int)(usage.monthpercent)]];
-		[_timeLabel setStringValue:[NSString stringWithFormat:
+		[percentOfMonthLabel setStringValue:[NSString stringWithFormat:@"%d%%",(int)(usage.monthpercent)]];
+		[timeLabel setStringValue:[NSString stringWithFormat:
 								   @"%dd remain",
 								   (signed int)(30.0-(usage.monthpercent*30.0/100.0))]];
 		
-		[_freeLabel setStringValue:[NSString stringWithFormat:@"Free: %d MB",
+		[freeLabel setStringValue:[NSString stringWithFormat:@"Free: %d MB",
 								   (int)((double)usage.plan-(double)usage.used)]];
         
-        [_updateMenuItem setTitle:[NSString stringWithFormat:@"Update Now - Last: %@",[self timeString]]];
+        [updateMenuItem setTitle:[NSString stringWithFormat:@"Update Now - Last: %@",[self timeString]]];
         [_statusItem setImage:[NSImage imageNamed:kImageResourceDefaultIcon]];
         
     }else{
         if(failedReason){
             
-            [_updateMenuItem setTitle:[NSString stringWithFormat:@"Update - %@", failedReason]];
+            [updateMenuItem setTitle:[NSString stringWithFormat:@"Update - %@", failedReason]];
         }else{
-            [_updateMenuItem setTitle:[NSString stringWithFormat:@"Update - Last attempt failed"]];
+            [updateMenuItem setTitle:[NSString stringWithFormat:@"Update - Last attempt failed"]];
         }
     }
     if(invalidateTimer){
@@ -336,8 +335,8 @@ int			kShowModeIconOnly               = 1;
 #pragma mark -
 - (void) performLogin{
     
-    NSString* username = [_usernameField stringValue];
-	NSString* password = [_passwordField stringValue];
+    NSString* username = [usernameField stringValue];
+	NSString* password = [passwordField stringValue];
     
     
 	if(username.length && password.length){
@@ -363,29 +362,29 @@ int			kShowModeIconOnly               = 1;
 		account=@"";
 	}
 	
-	[_usernameField setStringValue:account];
-	[_passwordField setStringValue:@""];
+	[usernameField setStringValue:account];
+	[passwordField setStringValue:@""];
 	
-	[NSApp beginSheet:_loginWindow modalForWindow:_window modalDelegate:self
+	[NSApp beginSheet:loginWindow modalForWindow:window modalDelegate:self
 	   didEndSelector:NULL contextInfo:nil];
-	[_loginWindow makeFirstResponder:_usernameField];
+	[loginWindow makeFirstResponder:usernameField];
 }
 
 - (IBAction)cancelLogin:(id)sender {
-    [_loginWindow orderOut:nil];
-    [NSApp endSheet:_loginWindow];
+    [loginWindow orderOut:nil];
+    [NSApp endSheet:loginWindow];
 }
 - (IBAction)completeLogin:(id)sender {
-    [_loginWindow orderOut:nil];
-    [NSApp endSheet:_loginWindow];
+    [loginWindow orderOut:nil];
+    [NSApp endSheet:loginWindow];
     [self performLogin];
     
-    [_runAtStartupCheckBox2 setState: [_runAtStartupCheckBox state]];
-    [self setStartAtLogin:[_runAtStartupCheckBox state] == NSOnState];
+    [runAtStartupCheckBox2 setState: [runAtStartupCheckBox state]];
+    [self setStartAtLogin:[runAtStartupCheckBox state] == NSOnState];
 }
 - (IBAction)changeRunAtStartupCheckbox2:(id)sender{
-    [_runAtStartupCheckBox setState: [_runAtStartupCheckBox2 state]];
-    [self setStartAtLogin:[_runAtStartupCheckBox state] == NSOnState];
+    [runAtStartupCheckBox setState: [runAtStartupCheckBox2 state]];
+    [self setStartAtLogin:[runAtStartupCheckBox state] == NSOnState];
     
     
 }
@@ -393,7 +392,7 @@ int			kShowModeIconOnly               = 1;
 - (IBAction) setPreferenceUpdatePeriod:(id)sender{
     int seconds = 30 MINUTES;
     
-    switch ([_updatePeriodPopUp indexOfSelectedItem]) {
+    switch ([updatePeriodPopUp indexOfSelectedItem]) {
         case 1:
             seconds = 60 MINUTES;
             break;
@@ -415,23 +414,23 @@ int			kShowModeIconOnly               = 1;
 - (IBAction) showPreferences:(id)sender{
     //TODO: Should this launch another app?
     [NSApp activateIgnoringOtherApps:YES];
-    [_window makeKeyAndOrderFront:nil];
+    [window makeKeyAndOrderFront:nil];
 }
 - (void) showDeadMenu{
     
-    [_usedMeter setDoubleValue:0.0];
-    [_timeMeter setDoubleValue:0.0];
-    [_usedLabel setStringValue:@""];
+    [usedMeter setDoubleValue:0.0];
+    [timeMeter setDoubleValue:0.0];
+    [usedLabel setStringValue:@""];
     
     //Memory Leak?
     [self setStatusText:@""];
     
-    [_percentOfMonthLabel setStringValue:@""];
-    [_timeLabel setStringValue:@""];
+    [percentOfMonthLabel setStringValue:@""];
+    [timeLabel setStringValue:@""];
     
-    [_freeLabel setStringValue:@""];
+    [freeLabel setStringValue:@""];
     
-    [_updateMenuItem setTitle:@"Update"];
+    [updateMenuItem setTitle:@"Update"];
     [_statusItem setImage:[NSImage imageNamed:kImageResourceDefaultIcon]];
 
 }
@@ -441,24 +440,24 @@ int			kShowModeIconOnly               = 1;
     if(username == nil){
         //Username pref isn't set: Must be first run.
         
-        [_signInStatusLabel setStringValue:[NSString stringWithFormat:@"Account: %@", @"(none)"]];
-        [_userLabel setStringValue:NSLocalizedString(@"Not Signed In", @"email for when not signed in")];
+        [signInStatusLabel setStringValue:[NSString stringWithFormat:@"Account: %@", @"(none)"]];
+        [userLabel setStringValue:NSLocalizedString(@"Not Signed In", @"email for when not signed in")];
         
         [self showDeadMenu];
         [self showPreferences:nil];
         [self showLogin:nil];
         return;
     }
-	[_signInStatusLabel setStringValue:[NSString stringWithFormat:@"Account: %@", username]];
-    [_userLabel setStringValue:username];
+	[signInStatusLabel setStringValue:[NSString stringWithFormat:@"Account: %@", username]];
+    [userLabel setStringValue:username];
     if(!_inConnection){
 		if(![updateTimer isValid]){
 			[self configureTimer];
         }
-		[_updateMenuItem setTitle:@"Updating..."];
-		[_updateMenuItem setEnabled:NO];
+		[updateMenuItem setTitle:@"Updating..."];
+		[updateMenuItem setEnabled:NO];
 		_inConnection=YES;
-        [_updatingIndicator startAnimation:self];
+        [updatingIndicator startAnimation:self];
 		[self performSelectorInBackground:@selector(updateInBackground:) withObject:self];
 	}else{
         //already updating...

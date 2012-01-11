@@ -31,6 +31,32 @@
         int error;
     } usage;
     
+    //@Synthsized properties:
+    NSWindow *window;
+    NSButton *runAtStartupCheckBox;
+    NSButton *runAtStartupCheckBox2;
+    NSTextField *usernameField;
+    NSTextField *passwordField;
+    NSWindow *loginWindow;
+    NSMenu *statusMenu;
+    NSTextField *signInStatusLabel;
+    NSProgressIndicator *updatingIndicator;
+    NSMenuItem *updateMenuItem;
+    NSPopUpButton *updatePeriodPopUp;
+    
+    NSTextField *percentOfMonthLabel;
+    NSTextField *freeLabel;
+    NSLevelIndicator *usedMeter;
+    NSLevelIndicator *timeMeter;
+    NSTextField* usedLabel;
+    NSTextField* timeLabel;
+    NSTextField* userLabel;
+    
+    NSTextField *versionLabel;
+    
+    NSMenuItem *setShowModeIconOnlyButton;
+    NSMenuItem *setShowModePercentageButton;
+    
 }
 
 @property (assign) IBOutlet NSWindow *window;
@@ -51,10 +77,6 @@
 @property (assign) IBOutlet NSPopUpButton *updatePeriodPopUp;
 
 
-
-
-//@property (assign) IBOutlet NSMenuItem *setShowModeIconOnlyButton;
-//@property (assign) IBOutlet NSMenuItem *setShowModePercentageButton;
 @property (assign) IBOutlet NSTextField *percentOfMonthLabel;
 @property (assign) IBOutlet NSTextField *freeLabel;
 @property (assign) IBOutlet NSLevelIndicator *usedMeter;
