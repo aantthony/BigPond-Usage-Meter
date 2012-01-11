@@ -30,8 +30,23 @@ UInt16	   kPort    = 443;
 NSString * kPath    = @"";
 
 - (void) setPassword:(NSString *) password forUsername:(NSString *) username{
-    [self removePasswordForUsername:username];
-
+    
+    
+    SecKeychainItemRef keychainItem = NULL;
+	OSStatus status = SecKeychainFindInternetPassword(NULL,
+                                                      stringByteLength(kServer), [kServer UTF8String],
+                                                      0, NULL,
+                                                      stringByteLength(username), [username UTF8String],
+                                                      stringByteLength(kPath), [kPath UTF8String],
+                                                      kPort, kSecProtocolTypeHTTPS,
+                                                      kSecAuthenticationTypeHTMLForm,
+                                                      NULL,
+                                                      NULL,
+                                                      &keychainItem);
+	if (status == noErr){
+		SecKeychainItemDelete(keychainItem);
+    }
+    
 	if (password.length){
         OSStatus err = SecKeychainAddInternetPassword(NULL,
                                        stringByteLength(kServer), [kServer UTF8String],

@@ -1,0 +1,245 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		92F76D4814BDC87100F048B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92F76D4714BDC87100F048B5 /* Foundation.framework */; };
+		92F76D4B14BDC87100F048B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F76D4A14BDC87100F048B5 /* main.m */; };
+		92F76D4F14BDC87100F048B5 /* UMTests.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92F76D4E14BDC87100F048B5 /* UMTests.1 */; };
+		92F76D5A14BDC90900F048B5 /* UMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F76D5914BDC90900F048B5 /* UMKeychain.m */; };
+		92F76D5C14BDCA3C00F048B5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92F76D5B14BDCA3C00F048B5 /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		92F76D4114BDC87100F048B5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				92F76D4F14BDC87100F048B5 /* UMTests.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		92F76D4314BDC87100F048B5 /* UMTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UMTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		92F76D4714BDC87100F048B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		92F76D4A14BDC87100F048B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		92F76D4D14BDC87100F048B5 /* UMTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UMTests-Prefix.pch"; sourceTree = "<group>"; };
+		92F76D4E14BDC87100F048B5 /* UMTests.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = UMTests.1; sourceTree = "<group>"; };
+		92F76D5814BDC90900F048B5 /* UMKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMKeychain.h; path = ../../UsageMeter/UMKeychain.h; sourceTree = "<group>"; };
+		92F76D5914BDC90900F048B5 /* UMKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UMKeychain.m; path = ../../UsageMeter/UMKeychain.m; sourceTree = "<group>"; };
+		92F76D5B14BDCA3C00F048B5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		92F76D4014BDC87100F048B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92F76D5C14BDCA3C00F048B5 /* Security.framework in Frameworks */,
+				92F76D4814BDC87100F048B5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		92F76D3814BDC87000F048B5 = {
+			isa = PBXGroup;
+			children = (
+				92F76D5B14BDCA3C00F048B5 /* Security.framework */,
+				92F76D4914BDC87100F048B5 /* UMTests */,
+				92F76D4614BDC87100F048B5 /* Frameworks */,
+				92F76D4414BDC87100F048B5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		92F76D4414BDC87100F048B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92F76D4314BDC87100F048B5 /* UMTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		92F76D4614BDC87100F048B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92F76D4714BDC87100F048B5 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92F76D4914BDC87100F048B5 /* UMTests */ = {
+			isa = PBXGroup;
+			children = (
+				92F76D5814BDC90900F048B5 /* UMKeychain.h */,
+				92F76D5914BDC90900F048B5 /* UMKeychain.m */,
+				92F76D4A14BDC87100F048B5 /* main.m */,
+				92F76D4E14BDC87100F048B5 /* UMTests.1 */,
+				92F76D4C14BDC87100F048B5 /* Supporting Files */,
+			);
+			path = UMTests;
+			sourceTree = "<group>";
+		};
+		92F76D4C14BDC87100F048B5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				92F76D4D14BDC87100F048B5 /* UMTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		92F76D4214BDC87100F048B5 /* UMTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92F76D5214BDC87100F048B5 /* Build configuration list for PBXNativeTarget "UMTests" */;
+			buildPhases = (
+				92F76D3F14BDC87100F048B5 /* Sources */,
+				92F76D4014BDC87100F048B5 /* Frameworks */,
+				92F76D4114BDC87100F048B5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UMTests;
+			productName = UMTests;
+			productReference = 92F76D4314BDC87100F048B5 /* UMTests */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		92F76D3A14BDC87000F048B5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Anthony Foster";
+			};
+			buildConfigurationList = 92F76D3D14BDC87000F048B5 /* Build configuration list for PBXProject "UMTests" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 92F76D3814BDC87000F048B5;
+			productRefGroup = 92F76D4414BDC87100F048B5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				92F76D4214BDC87100F048B5 /* UMTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		92F76D3F14BDC87100F048B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92F76D4B14BDC87100F048B5 /* main.m in Sources */,
+				92F76D5A14BDC90900F048B5 /* UMKeychain.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		92F76D5014BDC87100F048B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		92F76D5114BDC87100F048B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		92F76D5314BDC87100F048B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UMTests/UMTests-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		92F76D5414BDC87100F048B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UMTests/UMTests-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		92F76D3D14BDC87000F048B5 /* Build configuration list for PBXProject "UMTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92F76D5014BDC87100F048B5 /* Debug */,
+				92F76D5114BDC87100F048B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92F76D5214BDC87100F048B5 /* Build configuration list for PBXNativeTarget "UMTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92F76D5314BDC87100F048B5 /* Debug */,
+				92F76D5414BDC87100F048B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 92F76D3A14BDC87000F048B5 /* Project object */;
+}
