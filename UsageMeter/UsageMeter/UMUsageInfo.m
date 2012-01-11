@@ -157,7 +157,7 @@ stringByReplacingOccurrencesOfString:@"9" withString:@"1"];
     if(![ndata writeToURL:u_Info options:NSDataWritingAtomic error:&err]){
         NSLog(@"%@", err);
     }
-    NSLog(@"Dump created.");
+    NSLog(@"Error log created.");
 }
 - (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(int *)error{
     if((self = [super init])){
