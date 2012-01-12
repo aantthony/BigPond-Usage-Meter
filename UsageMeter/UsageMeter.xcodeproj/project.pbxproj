@@ -62,7 +62,6 @@
 		924387251429D9A10001E586 /* BigpondUsageData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BigpondUsageData.c; sourceTree = "<group>"; };
 		924387271429D9AE0001E586 /* BigpondUsageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigpondUsageData.h; sourceTree = "<group>"; };
 		924591AC146D135000CCA4B0 /* UsageMeter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UsageMeter.entitlements; sourceTree = "<group>"; };
-		924591AD146D19FD00CCA4B0 /* BigPond.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BigPond.icns; sourceTree = "<group>"; };
 		924591AF146D208F00CCA4B0 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		927F93DB14BD2A59003D4DD2 /* AppLoginItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLoginItem.h; sourceTree = "<group>"; };
 		927F93DC14BD2A59003D4DD2 /* AppLoginItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLoginItem.m; sourceTree = "<group>"; };
@@ -94,7 +93,6 @@
 		920850151429A14100502D63 = {
 			isa = PBXGroup;
 			children = (
-				924591AD146D19FD00CCA4B0 /* BigPond.icns */,
 				9208502A1429A14100502D63 /* UsageMeter */,
 				920850231429A14100502D63 /* Frameworks */,
 				920850211429A14100502D63 /* Products */,

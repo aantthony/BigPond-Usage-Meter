@@ -31,6 +31,7 @@ int main (int argc, const char * argv[])
 
     @autoreleasepool {
         test("Keychain", Keychain());
+        test("Keychain", Keychain());
     }
     return 0;
 }
