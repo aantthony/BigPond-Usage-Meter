@@ -1,3 +1,5 @@
+This branch will produce a signed binary. Use "git rebase master" to get all the updates.
+
 ## This program is currently broken due to changes in the way usage information is display on the Bigpond website. A new version is being made. Please help out - It's in the "new" branch.
 
 ## Monitor your BigPond usage on your Mac
