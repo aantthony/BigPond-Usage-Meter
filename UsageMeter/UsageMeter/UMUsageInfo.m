@@ -49,7 +49,8 @@ int const dumpErrorAnywayDebug = 0;
  UMError_DateParseError,
  UMError_InvalidPassword,
  UMError_InternetOffline,
- UMError_AccountLocked
+ UMError_AccountLocked,
+ UMError_CouldNotParsePlanSize
  */
 
 + (NSString *) stringForError:(int) UMError{
@@ -80,6 +81,8 @@ int const dumpErrorAnywayDebug = 0;
             return @"Internet Offline";
         case UMError_AccountLocked:
             return @"Account Locked";
+        case UMError_CouldNotParsePlanSize:
+            return @"Could Not Read Plan Size";
         case UMError_OK:
         default:
             return @"";
@@ -100,11 +103,16 @@ BOOL isFatal(int err){
         case UMError_TableNotFound:
         case UMError_TooManyTablesFound:
         case UMError_TotalsFieldsMissing:
+        case UMError_CouldNotParsePlanSize:
             return YES;
         case UMError_InvalidPassword:
+        case UMError_InternetOffline:
+        case UMError_AccountLocked:
+        case UMError_TimedOut:
         case UMError_OK:
-        default:
             return NO;
+        default:
+            return YES;
             
     }
                 
@@ -145,7 +153,7 @@ stringByReplacingOccurrencesOfString:@"9" withString:@"1"];
     
     [formatter release];
     
-    NSURL *u_Data = [dumpFolder URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", dateString]];
+    NSURL *u_Data = [dumpFolder URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.html", dateString]];
     NSURL *u_Info = [dumpFolder URLByAppendingPathComponent:[NSString stringWithFormat:@"%@-info.txt", dateString]];
     [fileManager createDirectoryAtPath:(NSString *)dstring withIntermediateDirectories:YES attributes:nil error:nil];
     NSString *d = [self protectPrivateData:[NSString stringWithUTF8String:[data bytes]]];
@@ -188,6 +196,8 @@ stringByReplacingOccurrencesOfString:@"9" withString:@"1"];
             NSLog(@"%@",[NSString stringWithFormat:@"No data?: %@",[err localizedDescription]]);
             if([err code] == -1009){
                 *error = UMError_InternetOffline;
+            }else if([err code] == -1001){
+                *error = UMError_TimedOut;
             }
         }else if(!response){
             *error = 10000;

@@ -47,7 +47,9 @@ enum UMError{
     UMError_DateParseError,
     UMError_InvalidPassword,
     UMError_InternetOffline,
-    UMError_AccountLocked
+    UMError_AccountLocked,
+    UMError_CouldNotParsePlanSize,
+    UMError_TimedOut
 } UMError;
 
 typedef union {

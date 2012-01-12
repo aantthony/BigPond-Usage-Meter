@@ -242,7 +242,9 @@ int			kShowModeIconOnly               = 1;
                  */
                 failedReason = @"Account Locked";
                 break;
-                
+            case UMError_TimedOut:
+                failedReason = @"Timed Out";
+                invalidateTimer = NO;
             case UMError_InternetOffline:
                 failedReason = @"Internet Offline";
                 invalidateTimer = NO;

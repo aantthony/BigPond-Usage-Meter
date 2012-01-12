@@ -201,6 +201,45 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
         
         doneQuery(rows);
         
+        //Try to fid the plan size:
+        
+        xPathQuery label_values = query((xmlNodePtr)doc, "//table[@class = 'label-value']//tr", &err);
+        int label_index;
+        int found_all_labels = 0;
+        for(label_index=0; !found_all_labels && (label_index<label_values.count);label_index++) {
+            xmlNodePtr field = label_values.nodes[label_index];
+            //Get Label:
+            xPathQuery label_Header_q = query(field, "/th", &err);
+            if(label_Header_q.count){
+                xmlNodePtr header = label_Header_q.nodes[0];
+                char * message = (char*)header->children[0].content;
+                if(strcmp("Monthly plan allowance", message) == 0){
+                    
+                    xPathQuery label_value_q = query(field, "/td", &err);
+                    if(label_value_q.count){
+                        xmlNodePtr value = label_value_q.nodes[0];
+                        char *text = (char*)value->children[0].content;
+                        //E.g. "200GB*, then slowed"
+                        //Need to convert this to MB
+                        int v;
+                        if(sscanf(text, "%dTB", &v)){
+                            printf("TB: %d", v);
+                        }else if(sscanf(text, "%dGB", &v)){
+                            printf("GB: %d", v);
+                        }else if(sscanf(text, "%dMB", &v)){
+                            printf("MB: %d", v);
+                        }else{
+                            err = UMError_CouldNotParsePlanSize;
+                        }
+                    }
+                    doneQuery(label_value_q);
+                    found_all_labels = 1;
+                }
+            }
+            doneQuery(label_Header_q);
+            
+        }
+        doneQuery(label_values);
     } else if(q.count == 0) {
         err = UMError_TableNotFound;
         xPathQuery errors = query((xmlNodePtr)doc, "//span[@class = 'desktopError']/p", &err);
