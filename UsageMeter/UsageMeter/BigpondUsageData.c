@@ -139,8 +139,6 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
         daily[dayIndex].date = 0;
     }
     
-    result->plan = 200000;
-    
     //Find the main daily usage table:
     xPathQuery q = query((xmlNodePtr)doc, "//table[@cellpadding = '3' and not(@class='usageScale')]", &err);
     if(q.count == 1) {
@@ -203,6 +201,7 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
         
         //Try to fid the plan size:
         
+        result->plan = 0;
         xPathQuery label_values = query((xmlNodePtr)doc, "//table[@class = 'label-value']//tr", &err);
         int label_index;
         int found_all_labels = 0;
@@ -222,12 +221,10 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
                         //E.g. "200GB*, then slowed"
                         //Need to convert this to MB
                         int v;
-                        if(sscanf(text, "%dTB", &v)){
-                            printf("TB: %d", v);
-                        }else if(sscanf(text, "%dGB", &v)){
-                            printf("GB: %d", v);
-                        }else if(sscanf(text, "%dMB", &v)){
-                            printf("MB: %d", v);
+                        
+                        //TODO: Assuming GB, is this safe?
+                        if(sscanf(text, "%d", &v)){
+                            result->plan = v * 1000;
                         }else{
                             err = UMError_CouldNotParsePlanSize;
                         }
@@ -238,6 +235,9 @@ enum UMError UMUsageDataFromHTML  (const char *buffer,int buffer_size, UMUsageDa
             }
             doneQuery(label_Header_q);
             
+        }
+        if(!result->plan){
+            err = UMError_CouldNotParsePlanSize;
         }
         doneQuery(label_values);
     } else if(q.count == 0) {
