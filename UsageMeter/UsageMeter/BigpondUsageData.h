@@ -31,7 +31,7 @@
 #define UsageMeter_BigpondUsageData_h
 
 #define UM_MAX_DAYS 40
-#define UM_NUM_FIELDS 5
+#define UM_NUM_FIELDS 8
 
 enum UMError{
     UMError_OK=0,
@@ -54,7 +54,7 @@ enum UMError{
 
 typedef union {
     struct {
-        int date, download, upload, total, unmetered;
+        int date, download, upload, total, unmetered, additional, slowed, unrated;
     };
     int value[UM_NUM_FIELDS];
 } UMDailyUsageData;

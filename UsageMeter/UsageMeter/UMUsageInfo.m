@@ -28,8 +28,9 @@
  */
 
 #import "UMUsageInfo.h"
-NSString * const kUsageMeterGotoURL = @"https://my.bigpond.com/mybigpond/myaccount/myusage/daily/default.do";
+NSString * const kUsageMeterGotoURL = @"https://usagemeter.bigpond.com/daily.do";
 NSString * const kUsageMeterPostURL = @"https://signon.bigpond.com/login";
+NSString * const kUsageMeterRef     = @"https://my.bigpond.com/mybigpond/myaccount/myusage/default.do";
 NSString * const kUsageMeterUA      = @"Mozilla/5.0 (Macintosh; U; en-us) UsageMeterDataUpdater/3.0";
 NSString * const kUsageMeterCT      = @"application/x-www-form-urlencoded";
 int const dumpErrorAnywayDebug = 0;
@@ -165,7 +166,7 @@ stringByReplacingOccurrencesOfString:@"9" withString:@"1"];
     if(![ndata writeToURL:u_Info options:NSDataWritingAtomic error:&err]){
         NSLog(@"%@", err);
     }
-    NSLog(@"Error log created.");
+    NSLog(@"Error log created: %@", u_Data);
 }
 - (UMUsageInfo *) initWithUser:(NSString*)username password:(NSString*)password error:(int *)error{
     if((self = [super init])){
@@ -185,6 +186,7 @@ stringByReplacingOccurrencesOfString:@"9" withString:@"1"];
         
         [request setValue:kUsageMeterUA forHTTPHeaderField:@"User-Agent"];
         [request setValue:kUsageMeterCT forHTTPHeaderField:@"Content-Type"];
+        [request setValue:kUsageMeterRef forHTTPHeaderField:@"Referer"];
         [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
         [request setHTTPBody:postData];
         
