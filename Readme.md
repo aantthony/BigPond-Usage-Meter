@@ -1,16 +1,12 @@
-## This program is currently broken due to changes in the way usage information is display on the Bigpond website. A new version is being made. Please help out - It's in the "new" branch.
-
 ## Monitor your BigPond usage on your Mac
 This is a BigPond usage meter menu bar item for Mac OS X. It sits up in the top right near the clock. It monitors how much you have downloaded and uploaded (your usage) and the percent of the month or billing cycle.
 
-It works on Leopard and Snow Leopard.
-
-If you prefer, there is also a [dashboard widget](http://url3.tk/bp/widget.php) which does exactly the same thing, and has a nice graph too.
+It works on Lion, and probably on Leopard and Snow Leopard.
 
 I am not affiliated with "BigPond" OR "Telstra Corporation Ltd" in any way.
 
 ### General
-[Terms and Conditions](http://url3.tk/bp/mb.php)
+Terms and Conditions/License agreement/Disclaimer: http://aantthony.github.com/BigPond-Usage-Meter/licence.html
 
 ### Requirements:
 * Mac OS X 10.7 or later (Does it work on 10.6 and 10.5?)
