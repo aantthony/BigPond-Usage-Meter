@@ -58,7 +58,7 @@ function m(n){
 			
 			<p>Your download should begin shortly...</p>
 		
-        <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Furl3.tk%2FBigPond-Usage-Meter%2F&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+        <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Faaantthony.github.com%2FBigPond-Usage-Meter%2F&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
         <p>
 			<a href="javascript:m(0)"><div class="tick"></div><div style="display:block;padding-top:8px">OK</div></a>
         </p>
@@ -91,13 +91,12 @@ function m(n){
 	<h1>Usage Meter Menu Bar for BigPond</h1>
 	<p>This is a bigpond usage meter menu bar item for Mac OS X. It sits up in the top right. It monitors how much you have downloaded and uploaded (your usage) and the percent of the month or billing cycle.</p>
 
-	<p>It works on Leopard and Snow Leopard.</p>
-	<h1>THIS PROGRAM DOES NOT WORK! The current release of the widget doesn't work either. You'll have to wait a while for an update.</h1>
+	<p>It works on Lion, and probably Leopard and Snow Leopard.</p>
 	{% for post in site.posts limit:1 %}
-	<div style="text-align:center"><a href="{{ post.file }}" onclick="m(3);pageTracker._trackPageview('dl/bigpond_mb.dmg.zip')" class="download"></a></div>
-	<p><span>{{ post.title }}</span> &raquo; <a href="http://aantthony.github.com/BigPond-Usage-Meter{{ post.url }}">Release Notes</a></p>
+	<!-- was previously to post.file -->
+	<div style="text-align:center"><a href="https://github.com/downloads/aantthony/BigPond-Usage-Meter/UsageMeterBeta.dmg" onclick="m(3);pageTracker._trackPageview('dl/bigpond_mb.dmg.zip')" class="download"></a></div>
+	<!--<p><span>{{ post.title }}</span> &raquo; <a href="http://aantthony.github.com/BigPond-Usage-Meter{{ post.url }}">Release Notes</a></p>-->
     {% endfor %}
-    <a href="http://url3.tk/BigPond-Usage-Meter/widget.html">Dashboard Widget</a><br />
     <br />
 	<a href="http://github.com/aantthony/BigPond-Usage-Meter">Source code on GitHub</a><br />
 	<a href="javascript:m(2)">Terms and Conditions</a><br /><br />
