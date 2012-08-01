@@ -245,6 +245,7 @@ int			kShowModeIconOnly               = 1;
             case UMError_TimedOut:
                 failedReason = @"Timed Out";
                 invalidateTimer = NO;
+                break;
             case UMError_InternetOffline:
                 failedReason = @"Internet Offline";
                 invalidateTimer = NO;
@@ -439,7 +440,8 @@ int			kShowModeIconOnly               = 1;
 - (IBAction) update:(id)sender {
     //NSLog(@"BUpdate Begin");
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:kPreferenceKeyNameUsername];
-    if(username == nil){
+    NSString *password = [[UMKeychain standardKeychain] passwordForUsername:username];
+    if(username == nil || password == nil){
         //Username pref isn't set: Must be first run.
         
         [signInStatusLabel setStringValue:[NSString stringWithFormat:@"Account: %@", @"(none)"]];
